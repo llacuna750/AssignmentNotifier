@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+:root {
+  --primary-color: #f9fafb;
+  --colapsibleBar-color: #ffffff;
+  --text-dark: #2c3e50;
+  --bg-light: #f8f9fa;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  /* font-optical-sizing: auto; */
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "GRAD" 0;
+}
+
+.collapsibleBarClose {
+  background-color: var(--colapsibleBar-color);
+}
+
+.DashboardContainer {
+  background-color: var(--primary-color);
+}
+
+.addSubject {
+  display: flex;
+  gap: 5px;
+  background-color: #FFFFFF;
+  margin: 5px;
+  color: #2563EB;
+  border: 1px solid;
+  border-radius: 15px;
+}
+.addAssignment {
+  display: flex;
+  gap: 5px;
+  background-color: #2563eb;
+  margin: 5px;
+  color: white;
+}
