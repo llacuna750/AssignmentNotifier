@@ -9,23 +9,30 @@
 </head>
 
 <body>
-    <div class="container">
-        <!-- collapsible sidebar container -->
-        <div class="collapsible-bar-Close">
-            <div class="hamburger hvr-bounce-in">
-                <img src="./icons/hamburger.svg" alt="harburger.svg" />
-            </div>
-
-
-            <div class="home-assTask-calender">
-                <div class="dashboardIcon hvr-bounce-in">
-                    <img src="./icons/dashboard.svg" alt="dashboard.svg" />
+    <div class="container" id="collapsible-bar">
+        <div class="collapsible-bar" >
+            <div class="title-app-hac">
+                <div class="hamburger" id="burger" >
+                    <img class="hvr-bounce-in" src="./icons/hamburger.svg" alt="harburger.svg" id="hamburger" />
+                    <div>
+                        <img src="./icons/logo-titleApp.svg" alt="logoTitleApp">
+                        <h2>Assignment <br> Notifier</h2>
+                    </div>
                 </div>
-                <div class="AssignmentTask hvr-bounce-in">
-                    <img src="./icons/AssignmentTask.svg" alt="AssignmentTask.svg" />
-                </div>
-                <div class="calendarSvg hvr-bounce-in">
-                    <img src="./icons/calendar.svg" alt="calendarSvg" />
+
+                <div class="home-assTask-calender" id="home-assTask-calender">
+                    <div class="dashboardIcon hvr-bounce-in">
+                        <img src="./icons/dashboard.svg" alt="dashboard.svg" />
+                        <p>Dashboard</p>
+                    </div>
+                    <div class="AssignmentTask hvr-bounce-in">
+                        <img src="./icons/AssignmentTask.svg" alt="AssignmentTask.svg" />
+                        <p>All Assignments</p>
+                    </div>
+                    <div class="calendarSvg hvr-bounce-in">
+                        <img src="./icons/calendar.svg" alt="calendarSvg" />
+                        <p>Calendar</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,7 +105,6 @@
         </div>
     </div> -->
 
-
     <!-- <div class="grid-container">
         <div class="item">Item 1</div>
         <div class="item">Item 2</div>
@@ -111,10 +117,7 @@
         <div class="item">Item 9</div>
     </div> -->
 
-    <!-- Give life of web App -->
-    <script>
-        // Later
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>

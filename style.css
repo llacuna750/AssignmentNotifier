@@ -17,25 +17,72 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 100px 3fr;
-  justify-items: center;
+  grid-template-columns: 340px 3fr;
   grid-template-rows: 1fr;
+  justify-items: center;
   background-color: var(--primary-color);
-  height: 100%;
 }
 
-.collapsible-bar-Close {
+.collapsible-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
+
   width: 100%;
   height: 100vh;
-  padding-top: 35px;
+  box-sizing: border-box;
+
+  position: sticky;
+  top: 0;
+  align-self: start;
+
   background-color: var(--colapsibleBar-color);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
-.collapsible-bar-Close div {
+
+.title-app-hac {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 50px;
+}
+
+.title-app-hac .hamburger,
+.home-assTask-calender div {
+  padding: 15px;
+}
+
+/* When this is used the collapsible-bar will Close  */
+
+.hamburger div.hide-hamburger-menu {
+  display: none;
+}
+.hide-hamburger-menu {
+  display: none;
+}
+
+.container-toggle-hide {
+  /* .container { */
+  display: grid;
+  grid-template-columns: 80px 3fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  background-color: var(--primary-color);
+}
+
+.collapsible-bar .hamburger {
+  display: flex;
+  justify-content: space-between;
+  gap: 65px;
+  font-size: x-small;
+}
+
+.hamburger div {
+  display: flex;
+  gap: 11px;
+}
+
+.collapsible-bar div {
   cursor: pointer;
 }
 
@@ -49,16 +96,16 @@ body {
   -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s;
 }
-.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
+.hvr-bounce-in:hover,
+.hvr-bounce-in:focus,
+.hvr-bounce-in:active {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
   -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
   transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
 }
 
-
-
-.collapsible-bar-Close img {
+.collapsible-bar img {
   width: 34px;
   height: auto;
 }
@@ -67,19 +114,33 @@ body {
   background-position: right;
 }
 
-.collapsible-bar-Close .home-assTask-calender {
+.collapsible-bar .home-assTask-calender {
   display: flex;
   flex-direction: column;
   gap: 17px;
+  width: 100%;
 }
+
+.home-assTask-calender div {
+  display: flex;
+  gap: 20px;
+  height: 20px;
+  align-items: center;
+  /* background-color: #eff6ff; */
+}
+
+/* Implement this styling of current tab  */
+.home-assTask-calender .dashboardIcon {
+  background-color: #eff6ff;
+  border-radius: 10px;
+}
+
 .AssignmentTask img {
   width: 32px;
-  /* height: auto; */
 }
 
 .dashboard-container {
   width: 100%;
-  /* padding: 5px; */
 }
 
 .dashboard-header {
