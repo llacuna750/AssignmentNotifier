@@ -9,12 +9,13 @@
 </head>
 
 <body>
-    <div class="container" id="collapsible-bar">
-        <div class="collapsible-bar" >
+    <div class="container container-toggle-hide" id="collapsible-bar">
+        <div class="collapsible-bar">
             <div class="title-app-hac">
-                <div class="hamburger" id="burger" >
-                    <img class="hvr-bounce-in" src="./icons/hamburger.svg" alt="harburger.svg" id="hamburger" />
-                    <div>
+                <div class="hamburger" id="burger">
+                    <img class="hvr-bounce-in" src="./icons/hamburger.svg" alt="harburger.svg" id="hamburger"
+                        aria-expanded="false" />
+                    <div class="hide-hamburger-menu">
                         <img src="./icons/logo-titleApp.svg" alt="logoTitleApp">
                         <h2>Assignment <br> Notifier</h2>
                     </div>
@@ -23,15 +24,15 @@
                 <div class="home-assTask-calender" id="home-assTask-calender">
                     <div class="dashboardIcon hvr-bounce-in">
                         <img src="./icons/dashboard.svg" alt="dashboard.svg" />
-                        <p>Dashboard</p>
+                        <p class="hide-hamburger-menu">Dashboard</p>
                     </div>
                     <div class="AssignmentTask hvr-bounce-in">
                         <img src="./icons/AssignmentTask.svg" alt="AssignmentTask.svg" />
-                        <p>All Assignments</p>
+                        <p class="hide-hamburger-menu">All Assignments</p>
                     </div>
                     <div class="calendarSvg hvr-bounce-in">
                         <img src="./icons/calendar.svg" alt="calendarSvg" />
-                        <p>Calendar</p>
+                        <p class="hide-hamburger-menu">Calendar</p>
                     </div>
                 </div>
             </div>
@@ -39,7 +40,7 @@
 
         <div class="dashboard-container">
             <div class="dashboard-header">
-                <div class="dashboard-text">   
+                <div class="dashboard-text">
                     <p>Dashboard</p>
                 </div>
                 <div class="add-buttons">

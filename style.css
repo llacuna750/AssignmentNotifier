@@ -79,7 +79,10 @@ body {
   max-width: 220px;
   min-width: 0;
   overflow: hidden;
-  transition: max-width 320ms ease, opacity 200ms ease, transform 320ms ease,
+  transition:
+    max-width 320ms ease,
+    opacity 200ms ease,
+    transform 320ms ease,
     visibility 0s linear;
 }
 
@@ -95,7 +98,10 @@ body {
   pointer-events: none;
   transform: translateX(-8px);
   visibility: hidden;
-  transition: max-width 320ms ease, opacity 200ms ease, transform 320ms ease,
+  transition:
+    max-width 320ms ease,
+    opacity 200ms ease,
+    transform 320ms ease,
     visibility 0s linear 320ms;
 }
 
@@ -163,7 +169,9 @@ body {
   gap: 20px;
   height: 20px;
   align-items: center;
-  transition: gap 320ms ease, transform 500ms;
+  transition:
+    gap 320ms ease,
+    transform 500ms;
   /* background-color: #eff6ff; */
 }
 
@@ -178,15 +186,32 @@ body {
 
 .dashboard-container {
   width: 100%;
+  border: 1px solid;
 }
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .add-buttons {
   display: flex;
+  gap: 5px;
+}
+
+.add-buttons div {
+  display: flex;
+  width: 150px;
+}
+
+.add-buttons img {
+  width: 20px;
+  height: auto;
+}
+
+.add-buttons p {
+  font-size: small;
 }
 
 .add-subject {
