@@ -17,10 +17,11 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: 340px 3fr;
+  grid-template-columns: 340px minmax(0, 3fr);
   grid-template-rows: 1fr;
   justify-items: center;
   background-color: var(--primary-color);
+  transition: grid-template-columns 320ms ease;
 }
 
 .collapsible-bar {
@@ -52,19 +53,9 @@ body {
   padding: 15px;
 }
 
-/* When this is used the collapsible-bar will Close  */
-
-.hamburger div.hide-hamburger-menu {
-  display: none;
-}
-.hide-hamburger-menu {
-  display: none;
-}
-
 .container-toggle-hide {
-  /* .container { */
   display: grid;
-  grid-template-columns: 80px 3fr;
+  grid-template-columns: 80px minmax(0, 3fr);
   grid-template-rows: 1fr;
   justify-items: center;
   background-color: var(--primary-color);
@@ -75,11 +66,57 @@ body {
   justify-content: space-between;
   gap: 65px;
   font-size: x-small;
+  transition: gap 320ms ease;
 }
 
 .hamburger div {
   display: flex;
   gap: 11px;
+}
+
+.hamburger > div,
+.home-assTask-calender p {
+  max-width: 220px;
+  min-width: 0;
+  overflow: hidden;
+  transition: max-width 320ms ease, opacity 200ms ease, transform 320ms ease,
+    visibility 0s linear;
+}
+
+.home-assTask-calender p {
+  max-width: 160px;
+  white-space: nowrap;
+}
+
+.hamburger > div.hide-hamburger-menu,
+.home-assTask-calender p.hide-hamburger-menu {
+  max-width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-8px);
+  visibility: hidden;
+  transition: max-width 320ms ease, opacity 200ms ease, transform 320ms ease,
+    visibility 0s linear 320ms;
+}
+
+.container-toggle-hide .collapsible-bar .hamburger {
+  gap: 0;
+}
+
+.container-toggle-hide .home-assTask-calender div {
+  gap: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .collapsible-bar .hamburger,
+  .home-assTask-calender div,
+  .hamburger > div,
+  .home-assTask-calender p,
+  .hamburger > div.hide-hamburger-menu,
+  .home-assTask-calender p.hide-hamburger-menu {
+    transition-duration: 0.01ms;
+  }
 }
 
 .collapsible-bar div {
@@ -126,10 +163,10 @@ body {
   gap: 20px;
   height: 20px;
   align-items: center;
+  transition: gap 320ms ease, transform 500ms;
   /* background-color: #eff6ff; */
 }
 
-/* Implement this styling of current tab  */
 .home-assTask-calender .dashboardIcon {
   background-color: #eff6ff;
   border-radius: 10px;
@@ -174,38 +211,4 @@ body {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   cursor: pointer;
-}
-
-/* Temporary css implementation 👇🏻*/
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
-}
-
-.item {
-  padding: 2em;
-  background-color: blue;
-  color: white;
-  text-align: center;
-  border-radius: 8px;
-  font-size: 2rem;
-}
-
-.collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
-.content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
 }
