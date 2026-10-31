@@ -3,26 +3,31 @@
 :root {
   --primary-color: #f9fafb;
   --colapsibleBar-color: #ffffff;
+  --main-blue-color: #2563eb;
+  --main-light-color: #ffffff;
   --text-dark: #2c3e50;
   --bg-light: #f8f9fa;
+  --status-content-border: 1px solid #e0e0ee;
 }
 
 body {
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-style: normal;
-  /* background-color: blue; */
   margin: 0;
 }
 
 .container {
   display: grid;
   grid-template-columns: 340px minmax(0, 3fr);
-  grid-template-rows: 1fr;
   justify-items: center;
   background-color: var(--primary-color);
   transition: grid-template-columns 320ms ease;
 }
+
+/* 
+  ----------------------------- collapsible-bar-cotainer -----------------------------
+*/
 
 .collapsible-bar {
   display: flex;
@@ -33,12 +38,13 @@ body {
   height: 100vh;
   box-sizing: border-box;
 
-  position: sticky;
   top: 0;
   align-self: start;
 
   background-color: var(--colapsibleBar-color);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow:
+    rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
 .title-app-hac {
@@ -128,26 +134,6 @@ body {
 .collapsible-bar div {
   cursor: pointer;
 }
-
-/* Bounce In */
-.hvr-bounce-in {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-}
-.hvr-bounce-in:hover,
-.hvr-bounce-in:focus,
-.hvr-bounce-in:active {
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
-}
-
 .collapsible-bar img {
   width: 34px;
   height: auto;
@@ -184,20 +170,46 @@ body {
   width: 32px;
 }
 
+/* 
+  ----------------------------- Dashboard-container -----------------------------
+*/
+
 .dashboard-container {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  border: 1px solid;
+  padding: 2em 3em;
+  box-sizing: border-box;
+  gap: 32px;
 }
 
-.dashboard-header {
+.dashboard-header,
+.stats {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* margin: 15px 25px; */
+}
+
+.dashboard-header div {
+  cursor: pointer;
+}
+
+/* 
+  ----------------------------- Dashboard & Add Buttons -----------------------------
+*/
+
+.dashboard-text p {
+  font-weight: 650;
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+  color: var(--main-blue-color);
 }
 
 .add-buttons {
   display: flex;
-  gap: 5px;
+  row-gap: 8px;
 }
 
 .add-buttons div {
@@ -214,26 +226,109 @@ body {
   font-size: small;
 }
 
-.add-subject {
+.add-buttons div {
   display: flex;
   justify-content: center;
   gap: 5px;
-  background-color: #ffffff;
   margin: 5px;
-  color: #2563eb;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+.add-subject {
+  background-color: #ffffff;
+  color: #2563eb;
 }
 
 .add-assignment {
-  display: flex;
-  justify-content: center;
-  gap: 5px;
   background-color: #2563eb;
-  margin: 5px;
   color: white;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+/* 
+  ----------------------------- Stats-container -----------------------------
+*/
+.stats div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 9px;
+
+  width: 26rem;
+  padding: 35px;
+
+  border: var(--status-content-border);
+  border-radius: 20px;
+
+  background-color: var(--main-light-color);
+  box-sizing: border-box;
+
+  /* Base font size */
+  --base-size: 14px;
+
+  /* Smooth transition */
+  transition: all 0.2s ease;
+}
+
+/* Reset paragraph spacing */
+.stats p {
+  margin: 0;
+}
+
+/* Label */
+.stats p:first-child {
+  font-size: calc(var(--base-size) * 0.9);
+  color: #777;
+}
+
+/* Metric */
+.stats p:last-child {
+  font-size: calc(var(--base-size) * 1.8);
+  font-weight: 600;
+  color: #222;
+}
+
+/* 
+  ----------------------------- status-assignment-container -----------------------------
+*/
+
+.status-assignment-container .view-All {
+  justify-content: flex-end;
+  display: flex;
   cursor: pointer;
+}
+
+.status-assignment-container p {
+  color: var(--main-blue-color);
+}
+
+.sample-data {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: var(--status-content-border);
+  background-color: var(--main-light-color);
+  border-radius: 20px;
+  padding: 1.3rem;
+}
+
+.info-status {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-status,
+.sub-img-tAss-ins-due {
+  display: flex;
+  align-items: center;
+}
+
+.start-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sample-data p {
+  margin: 0;
 }
