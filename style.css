@@ -5,9 +5,11 @@
   --colapsibleBar-color: #ffffff;
   --main-blue-color: #2563eb;
   --main-light-color: #ffffff;
+  --pending-color: #f3f4f6;
   --text-dark: #2c3e50;
   --bg-light: #f8f9fa;
   --status-content-border: 1px solid #e0e0ee;
+  --pharagraph-status-color: #6b7280;
 }
 
 body {
@@ -324,11 +326,112 @@ body {
   align-items: center;
 }
 
-.start-action {
+.sub-img-tAss-ins-due {
+  gap: 17px;
+}
+
+.sub-img-tAss-ins-due img {
+  width: 50px;
+  border-radius: 26px;
+}
+
+.logo-status {
+  gap: 39px;
+}
+
+.logo-status .clock-icon-pending {
   display: flex;
-  justify-content: flex-end;
+  background-color: var(--pending-color);
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 17px;
+  gap: 7px;
+}
+
+.clock-icon-pending img {
+  width: 21px;
+}
+
+.status-effect div {
+  font-size: 11px;
+}
+
+.sample-data p,
+h5 {
+  margin: 0;
 }
 
 .sample-data p {
-  margin: 0;
+  color: var(--pharagraph-status-color);
+  font-weight: 400;
 }
+
+/*               Sleep pending effect   Uiverse.io by necatimertmetin           
+*/
+.z {
+  position: absolute;
+  font-size: 32px;
+  opacity: 0;
+}
+.z-1 {
+  animation: swayUpToRight 2s ease-out infinite;
+}
+.z-2 {
+  animation: swayUpToRight 2s ease-out 0.5s infinite;
+}
+.z-3 {
+  animation: swayUpToRight 2s ease-out 1s infinite;
+}
+.z-4 {
+  animation: swayUpToRight 2s ease-out 1.5s infinite;
+}
+@keyframes swayUpToRight {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    /* default effects: transform: translate(80px, -100px) rotate(30deg); */
+    transform: translate(32px, -44px) rotate(40deg);
+    opacity: 0;
+  }
+}
+
+/*                        Start Action css                           */
+.start-action {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icon container */
+.start-action div {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* background-color: #b4c0da; */
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Icon image */
+.start-action img {
+  width: 25px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Hover effect */
+.start-action div:hover {
+  background-color: #8eddfc;
+}
+
+
