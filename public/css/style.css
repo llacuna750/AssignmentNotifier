@@ -22,6 +22,7 @@ body {
 .container {
   display: grid;
   grid-template-columns: 340px minmax(0, 3fr);
+  grid-template-rows: 1fr;
   justify-items: center;
   background-color: var(--primary-color);
   transition: grid-template-columns 320ms ease;
@@ -61,12 +62,14 @@ body {
   padding: 15px;
 }
 
+
 .container-toggle-hide {
   display: grid;
   grid-template-columns: 80px minmax(0, 3fr);
   grid-template-rows: 1fr;
   justify-items: center;
   background-color: var(--primary-color);
+  transition: grid-template-columns 320ms ease;
 }
 
 .collapsible-bar .hamburger {

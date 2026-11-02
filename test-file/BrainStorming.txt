@@ -1,0 +1,27 @@
+1. How do you implement the localStorage in your sidebar ui
+
+- currently the sidebar is broken it can't toggle to open sidebar
+- sidebar now is default to close permanently 
+
+test Solution:
+1. Find html elemenents / structure that hold sidebar look at class
+
+the element that defaulted the ui is used class: container-toggle-hide / close sidebar
+
+Code:
+.container-toggle-hide {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 3fr);
+  grid-template-rows: 1fr;
+  justify-items: center;
+  background-color: var(--primary-color);
+}
+
+- class .container || .container-toggle-hide is the parent that adjusted the layout
+- .container css make it sidebar Open
+- .container-toggle-hide css make it sidebar Close
+
+- i created the localStorage and array to store the state value
+
+
+

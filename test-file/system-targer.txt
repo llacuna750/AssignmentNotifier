@@ -1,0 +1,24 @@
+1. Identify the problem
+What problem am I solving? Who will use this software?
+Output: A clear problem statement.
+•	 I am not remembering sometimes my activities and I need a system that notify my assignments
+•	Me, others can use
+2. Define requirements
+List the features the first version must have. Leave optional features for later.
+Output: MVP feature list.
+
+
+1.	Core Features (Must Have)
+
+•	Assignment Creation / Pending to complete: A simple input form to add assignment with a title and due date.
+•	Edit assignment creation: You can edit the existing assignment create.
+•	Status Updates: A toggle button to mark tasks as "In Progress" or "Completed."
+•	Data Persistence: Cloud storage so user data saves automatically and persists across sessions.  (local storage locally)
+•	Assignment Dashboard: It display pending assigment and due date
+
+
+2.	Deferred Features (Nice to Have / Phase 2)
+
+•	Push Notifications: Reminders sent via messager  or email digests.
+•	Dark Mode: A secondary visual theme for low-light environments.
+
