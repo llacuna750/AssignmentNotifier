@@ -17,7 +17,7 @@ export function sidebarStateChanger () {
     sidebarView()
 }
 
-
+sidebarStateChanger()
 
 /*
 for (let i = 0; i < localStorage.length; i++) {
@@ -49,8 +49,6 @@ function saveBooks() {
 }
 
 books.push('dang')
-*/
-
 
 const athlete1 = { name: "Alice", age: "50" };
 const athlete2 = { name: "Dave", age: "51" };
@@ -62,5 +60,7 @@ const finishers = new Map();
 finishers.set(athlete1, 10000);
 finishers.set(athlete2, 7000);
 
-// console.log(finishers);
-// saveBooks()
+console.log(finishers);
+saveBooks()
+*/
+
