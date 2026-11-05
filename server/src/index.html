@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front-end</title>
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <button>Get data</button>
+
+    <!-- <script>
+        const heading = document.querySelector('h1')
+        const button = document.querySelector('button')
+
+        button.addEventListener('click', async () => { 
+            fetch('http://localhost:3000/message')
+                .then(res => {
+                    if (!res.ok) {
+                        throw new Error(`Server error: ${res.status} ${res.statusText}`)
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    heading.textContent = data.message
+                    console.log(data)
+                })
+                .catch(err => heading.textContent = err.message)
+        })
+    </script> -->
+
+    <form id="contact-form">
+        <input type="text" placeholder="name" id="name">
+        <textarea id="message" placeholder="message "></textarea>
+        <button>Submit</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('contact-form')
+        const nameInput = document.getElementById('name')
+        const messageTextarea = document.getElementById('message')
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+            const name = nameInput.value
+            const message = messageTextarea.value
+
+            try {
+                const response = await fetch('http://localhost:3000/message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, message }),
+                })
+                if (!response.ok) throw new Error(`Server Error: ${response.status} ${response.statusText}`)
+
+                const data = await response.json()
+                console.log('Response from the server:', data)
+            } catch (error) {
+                console.log('Error an occur: ', error.message)
+            }
+        })
+    </script>
+</body>
+
+</html>
