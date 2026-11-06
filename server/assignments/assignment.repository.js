@@ -1,4 +1,4 @@
-import pool from "../../db/pool.js";
+import pool from "../database.js";
 
 async function findAll() {
   const [selectAssignment] = await pool.query(`SELECT * FROM assignment`);
@@ -30,6 +30,11 @@ async function deleteById(id) {
     id,
   ]);
   return targetDel.affectedRows > 0;
+}
+
+async function updateById(id) {
+  const targetID = await pool.query(`UPDATE assignment 
+  set `);
 }
 
 export { findAll, findById, create, deleteById };

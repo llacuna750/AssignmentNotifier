@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import * as assignmentController from './modules/assignments/assignment.controller.js'
+import * as assignmentController from './assignments/assignment.controller.js'
 
 const app = express();
 
