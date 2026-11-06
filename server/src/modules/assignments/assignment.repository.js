@@ -1,4 +1,4 @@
-import { pool } from "../../db/pool.js";
+import pool from "../../db/pool.js";
 
 async function findAll() {
   const [selectAssignment] = await pool.query(`SELECT * FROM assignment`);
@@ -22,7 +22,7 @@ async function create(title, subject) {
     VALUES (?, ?)`,
     [title, subject],
   );
-  return findSpecific(created.insertId);
+  return findById(created.insertId);
 }
 
 async function deleteById(id) {
@@ -32,9 +32,4 @@ async function deleteById(id) {
   return targetDel.affectedRows > 0;
 }
 
-export {
-  findAll,
-  findSpecific,
-  create,
-  deleteAssignment,
-};
+export { findAll, findById, create, deleteById };

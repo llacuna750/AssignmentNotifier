@@ -1,4 +1,4 @@
-import assignmentRepository from "./assignment.repository.js";
+import * as assignmentRepository from "./assignment.repository.js";
 
 async function getAllAssignments() {
   const assignment = await assignmentRepository.findAll();

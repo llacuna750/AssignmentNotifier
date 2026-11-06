@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import * as assignmentController from './modules/assignments/assignment.controller.js'
 
 const app = express();
 
@@ -10,11 +11,12 @@ app.use(
 );
 
 app.use(express.json());
-
-const port = 3000;
+const port = 3000
 app.listen(port, function () {
   console.log(`Server is running on http://localhost:${port} 🚀`);
 });
+
+app.get("/", assignmentController.getAll);
 
 /*
 {
