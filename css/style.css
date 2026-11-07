@@ -33,13 +33,7 @@ body {
 */
 
 .collapsible-bar {
-  display: INSERT INTO assignment (id, title, subject, created_at)
-  VALUES (
-      id:int,
-      'title:varchar',
-      'subject:varchar',
-      'created_at:timestamp'
-    );flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 

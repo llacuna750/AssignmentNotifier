@@ -32,9 +32,9 @@ async function deleteById(id) {
   return targetDel.affectedRows > 0;
 }
 
-async function updateById(id) {
-  const targetID = await pool.query(`UPDATE assignment 
-  set `);
-}
+// async function updateById(id) {
+//   const targetID = await pool.query(`UPDATE assignment 
+//   set `);
+// }
 
 export { findAll, findById, create, deleteById };
