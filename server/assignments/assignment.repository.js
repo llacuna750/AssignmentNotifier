@@ -1,14 +1,14 @@
 import pool from "../database.js";
 
 async function findAll() {
-  const [selectAssignment] = await pool.query(`SELECT * FROM assignment`);
-  return selectAssignment;
+  const [allAssignment] = await pool.query(`SELECT * FROM assignment`);
+  return allAssignment;
 }
 
 async function findById(id) {
   const [assignmentSelected] = await pool.query(
     `SELECT * 
-      FROM assignment
+      FROM assignments
       WHERE id = ?
       `,
     [id],
@@ -31,6 +31,8 @@ async function deleteById(id) {
   ]);
   return targetDel.affectedRows > 0;
 }
+
+
 
 // async function updateById(id) {
 //   const targetID = await pool.query(`UPDATE assignment 
