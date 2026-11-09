@@ -1,12 +1,16 @@
 import express from "express";
 import cors from "cors";
-import { router as productsRouter } from "./products.js";
+import { router as productsRouter } from "./routes/products.js";
+import { router as messagesRouter } from "./routes/messages.js";
 import * as assignmentController from "./assignments/assignment.controller.js";
 
 const app = express();
 const port = 3000;
-
+/*
+  * Responsibility: Handle business logic and validation.
+*/
 app.use(express.json());
+
 app.use(
   cors({
     origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
@@ -14,8 +18,13 @@ app.use(
 );
 
 app.use("/products", productsRouter);
-app.get("/", (req, res) => assignmentController.getAll(req, res));
+app.use("/messages", messagesRouter);
 
+app.get("/", (req, res) => assignmentController.getAll(req, res));  
+
+app.listen(port, function () {
+  console.log(`Server is running on http://localhost:${port} 🚀`);
+});
 /*
   {
     app.get("/", (req, res) => {
@@ -35,15 +44,11 @@ app.get("/", (req, res) => assignmentController.getAll(req, res));
       res.json({ message: "Hello from your express backend 😁" });
     });
     
-    app.post("/message", (req, res) => {
-      const { name, message } = req.body;
-    
-      console.log("New message: ", name, message);
-      res.send({ message: "Thank you for your message" });
-    });
-  
-  app.listen(port, function () {
-    console.log(`Server is running on http://localhost:${port} 🚀`);
-  });
   }
 */
+
+
+
+
+
+

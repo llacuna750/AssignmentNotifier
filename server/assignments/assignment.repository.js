@@ -1,7 +1,15 @@
+/*
+* 
+* 
+* Responsibility: Receive HTTP requests,
+* communicate with the service, and return HTTP responses.
+* 
+* 
+*/
 import pool from "../database.js";
 
 async function findAll() {
-  const [allAssignment] = await pool.query(`SELECT * FROM assignment`);
+  const [allAssignment] = await pool.query(`SELECT * FROM assignments`);
   return allAssignment;
 }
 
@@ -18,7 +26,7 @@ async function findById(id) {
 
 async function create(title, subject) {
   const [created] = await pool.query(
-    `INSERT INTO assignment (title, subject) 
+    `INSERT INTO assignments (title, subject) 
     VALUES (?, ?)`,
     [title, subject],
   );
@@ -26,16 +34,15 @@ async function create(title, subject) {
 }
 
 async function deleteById(id) {
-  const [targetDel] = await pool.query(`DELETE FROM assignment WHERE id = ? `, [
-    id,
-  ]);
+  const [targetDel] = await pool.query(
+    `DELETE FROM assignments WHERE id = ? `,
+    [id],
+  );
   return targetDel.affectedRows > 0;
 }
 
-
-
 // async function updateById(id) {
-//   const targetID = await pool.query(`UPDATE assignment 
+//   const targetID = await pool.query(`UPDATE assignment
 //   set `);
 // }
 

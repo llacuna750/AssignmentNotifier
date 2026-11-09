@@ -21,4 +21,3 @@ Output: MVP feature list.
 
 •	Push Notifications: Reminders sent via messager  or email digests.
 •	Dark Mode: A secondary visual theme for low-light environments.
-

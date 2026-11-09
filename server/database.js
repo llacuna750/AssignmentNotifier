@@ -13,10 +13,9 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-
 // 2.1 Query to create your initial users tables if they don't exist
 const initusersTable = `
-  CREATE TABLE users (
+  CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -28,7 +27,6 @@ const initusersTable = `
     UNIQUE KEY email_unique(email)
   )
 `;
-
 
 // 2.2 Query to create your initial subjects tables if they don't exist
 const initsubjectTable = `
@@ -46,9 +44,9 @@ CREATE TABLE IF NOT EXISTS subjects (
     on delete restrict
   );
   `;
-  
-  // 2.3 Query to create your initial assignment tables if they don't exist
-  const initassignmentTable = `
+
+// 2.3 Query to create your initial assignment tables if they don't exist
+const initassignmentTable = `
     CREATE TABLE IF NOT EXISTS assignments (
       id int primary key auto_increment,
       title varchar(150) not null,
@@ -64,7 +62,6 @@ CREATE TABLE IF NOT EXISTS subjects (
       on delete restrict
     );
   `;
-
 
 const initializaDatabase = async () => {
   try {
