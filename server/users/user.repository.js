@@ -20,5 +20,9 @@ async function findById(id) {
   );
   return userSelected[0];
 }
+                    
 
-console.log(await findById(1));
+// console.log(await findAll())
+// console.log(await findById(2));
+
+export default { findAll, findById };

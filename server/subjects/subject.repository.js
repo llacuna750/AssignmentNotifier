@@ -1,5 +1,11 @@
-// * Responsibility: Execute SQL queries and communicate with the database.
-
+/* 
+* 
+* 
+* Responsibility: Execute SQL queries and 
+* communicate with the database.
+*  
+* 
+*/
 import pool from "../database.js";
 
 async function getAll() {
@@ -24,11 +30,8 @@ async function create(user_Id, title, instructor) {
     VALUES (?, ?, ?)`,
     [user_Id, title, instructor],
   );
-  return [findById(created.insertId)];
+  return findById(created.insertId);
 }
 
-// console.log(await create(1, "", "Isabel"));
-// console.log(await getAll());
-// console.log(await findById(1000));
 
 export default { getAll, findById, create };
