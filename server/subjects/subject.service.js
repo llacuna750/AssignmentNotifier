@@ -4,7 +4,9 @@
  *  Responsibility: Handle business logic and validation.
  *
  *
+ *
  */
+
 import subjectRepository from "./subject.repository.js";
 import userRepository from "../users/user.repository.js";
 
@@ -21,63 +23,66 @@ const createError = (message, statusCode) => {
  *  isNaN(Number('dwada'))  is Not a number?  true
  *  isNaN(Number('12312'))  is Not a number?  false
  */
-function isPureTextString(t, i) {
-  return [t, i].every((e) => typeof e === "string" && isNaN(Number(e)));
+function isPureTextString(...values) {
+  return values.every(
+    (value) => typeof value === "string" && Number.isNaN(Number(value.trim())),
+  );
 }
 
 // Validate subject input
-async function validateInput(user_Id, title, instructor) {
+async function validateInput(userId, title, instructor) {
+  // 1. Validate data types
+  if (typeof title !== "string" || typeof instructor !== "string") {
+    throw createError("Title and instructor must be strings.", 400);
+  }
+
+  // 2. Remove unnecessary whitespace
   title = title.trim();
   instructor = instructor.trim();
 
+  // 3. Validate required fields
   if (!title || !instructor) {
     throw createError("Title and instructor are required.", 400);
   }
 
+  // 4. Reject numeric-only strings
   if (!isPureTextString(title, instructor)) {
-    throw createError("input from title and instructor must be string!", 400);
+    throw createError("Title and instructor must contain text.", 400);
   }
 
+  // 5. Validate user existence
+  const user = await userRepository.findById(userId);
+
+  if (user == null) {
+    throw createError("User ID not found.", 404);
+  }
+
+  // 6. Check for duplicate subjects
   const isDuplicatedEntry = (await getAllSubjects()).some(
     (item) => item.title === title && item.instructor === instructor,
   );
 
-  if ((await userRepository.findById(user_Id)) === undefined) {
-    throw createError("user_id not found!", 404);
-  }
-
   if (isDuplicatedEntry) {
-    throw createError(
-      "The values you insert is already exists on database!",
-      400,
-    );
+    throw createError("This subject already exists.", 409);
   }
 
+  // 6. Return validated data
   return {
-    user_Id: user_Id,
-    title: title,
-    instructor: instructor,
+    userId,
+    title,
+    instructor,
   };
 }
 
 // Create subject
 async function createAssignment(user_Id, title, instructor) {
   const data = await validateInput(user_Id, title, instructor);
-
   try {
-    return subjectRepository.create(
-      data.user_Id,
-      data.title,
-      data.instructor,
-    );
+    return subjectRepository.create(data.userId, data.title, data.instructor);
   } catch (error) {
     throw error;
   }
 }
-
-console.log(
-  await createAssignment(2, "IAS ", "Isabelle   "),
-);
 
 // Retrieve all subjects
 async function getAllSubjects() {
@@ -89,6 +94,3 @@ async function getSubjectById(id) {
   const [subjectSelected] = await subjectRepository.findById(id);
   return subjectSelected;
 }
-
-// console.log(await validateInput("Haynako", "123123"));
-// console.log(await validateInput("", ""));

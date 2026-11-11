@@ -1,4 +1,4 @@
-import express from "express";
+import express, { request, response } from "express";
 import cors from "cors";
 import { router as productsRouter } from "./routes/products.js";
 import { router as messagesRouter } from "./routes/messages.js";
@@ -6,21 +6,30 @@ import * as assignmentController from "./assignments/assignment.controller.js";
 
 const app = express();
 const port = 3000;
-/*
-  * Responsibility: Handle business logic and validation.
-*/
-app.use(express.json());
 
+// Enable CORS for specific origins
 app.use(
   cors({
     origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
   }),
 );
 
+// Middleware to log incoming requests
+app.use((request, response, next) => {
+  console.log(request.method, request.path);
+  next();
+});
+
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
+// Use the imported routers for specific routes
 app.use("/products", productsRouter);
 app.use("/messages", messagesRouter);
 
-app.get("/", (req, res) => assignmentController.getAll(req, res));  
+app.get("/", (request, response) =>
+  assignmentController.getAll(request, response),
+);
 
 app.listen(port, function () {
   console.log(`Server is running on http://localhost:${port} 🚀`);
@@ -46,9 +55,3 @@ app.listen(port, function () {
     
   }
 */
-
-
-
-
-
-
