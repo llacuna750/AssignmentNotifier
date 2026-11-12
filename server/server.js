@@ -2,7 +2,9 @@ import express, { request, response } from "express";
 import cors from "cors";
 import { router as productsRouter } from "./routes/products.js";
 import { router as messagesRouter } from "./routes/messages.js";
-import * as assignmentController from "./assignments/assignment.controller.js";
+import * as assignmentController from "./modules/assignments/assignment.controller.js";
+import authRouter  from "./modules/auth/auth.routes.js";
+import errorMiddleware from "./middleware/errorMiddleware.js";
 
 const app = express();
 const port = 3000;
@@ -16,20 +18,29 @@ app.use(
 
 // Middleware to log incoming requests
 app.use((request, response, next) => {
-  console.log(request.method, request.path);
+  console.log(
+    `[${new Date().toDateString()}, ${new Date().toLocaleTimeString()}] ${request.method} ${request.url}`,
+  );
   next();
 });
-
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
 // Use the imported routers for specific routes
 app.use("/products", productsRouter);
+
+// messages route
 app.use("/messages", messagesRouter);
+
+// Path: /api/v1/auth/sign-up (POST)
+app.use("/api/v1/auth/", authRouter);
 
 app.get("/", (request, response) =>
   assignmentController.getAll(request, response),
 );
+
+// Keep the error handler after all routes so it can handle their errors.
+app.use(errorMiddleware);
 
 app.listen(port, function () {
   console.log(`Server is running on http://localhost:${port} 🚀`);

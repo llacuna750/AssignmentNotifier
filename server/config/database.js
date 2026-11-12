@@ -25,7 +25,7 @@ const initusersTable = `
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY email_unique(email)
-  )
+  ) ENGINE=InnoDB;
 `;
 
 // 2.2 Query to create your initial subjects tables if they don't exist
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS subjects (
     foreign key (user_id) references users(id)
     on update cascade
     on delete restrict
-  );
+  ) ENGINE=InnoDB;
   `;
 
 // 2.3 Query to create your initial assignment tables if they don't exist
@@ -60,7 +60,7 @@ const initassignmentTable = `
       references subjects(id)
       on update cascade
       on delete restrict
-    );
+    ) ENGINE=InnoDB;
   `;
 
 const initializaDatabase = async () => {
@@ -81,6 +81,7 @@ const initializaDatabase = async () => {
 await initializaDatabase();
 export default pool;
 /*
+
   {
     try {
       await pool.query("SELECT 1");

@@ -6,7 +6,7 @@
 *  
 * 
 */
-import pool from "../database.js";
+import pool from "../../config/database.js";
 
 async function getAll() {
   const [allSubject] = await pool.query(`SELECT * FROM subjects`);

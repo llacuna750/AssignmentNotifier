@@ -6,7 +6,7 @@
 * 
 * 
 */
-import pool from "../database.js";
+import pool from "../../config/database.js";
 
 async function findAll() {
   const [allAssignment] = await pool.query(`SELECT * FROM assignments`);
@@ -24,11 +24,11 @@ async function findById(id) {
   return assignmentSelected[0];
 }
 
-async function create(title, subject) {
+async function create(title, due_date, subject_id) {
   const [created] = await pool.query(
-    `INSERT INTO assignments (title, subject) 
-    VALUES (?, ?)`,
-    [title, subject],
+    `INSERT INTO assignments (title, due_date, subject_id) 
+    VALUES (?, ?, ?)`,
+    [title, due_date, subject_id],
   );
   return findById(created.insertId);
 }
@@ -45,5 +45,9 @@ async function deleteById(id) {
 //   const targetID = await pool.query(`UPDATE assignment
 //   set `);
 // }
+
+// console.log(await deleteById(1))
+
+
 
 export { findAll, findById, create, deleteById };
