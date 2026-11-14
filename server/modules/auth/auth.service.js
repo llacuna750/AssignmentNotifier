@@ -38,18 +38,20 @@ async function signUp(userData = {}) {
   const salt = await bcrypt.genSalt(10);
   const password_hash = await bcrypt.hash(password, salt);
 
-  const token = jwt.sign({ email: email }, process.env.JWT_SECRETS, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-
-  const id = await userRepository.create({
+  const userId = await userRepository.create({
     name: name.trim(),
     email: normalizedEmail,
     password_hash,
   });
 
-  // Return public fields only; the password and hash stay on the server.
-  return { id, name: name.trim(), email: normalizedEmail.trim() };
+  const token = jwt.sign({ userId }, process.env.JWT_SECRETS, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+
+  return {
+    token,
+    user: { id: userId, name: name.trim(), email: normalizedEmail, password_hash},
+  };
 }
 
 export default { signUp };

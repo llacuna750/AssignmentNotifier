@@ -19,3 +19,4 @@ const signIn = async (req, res, next) => {};
 const signOut = async (req, res, next) => {};
 
 export { signUp };
+  
