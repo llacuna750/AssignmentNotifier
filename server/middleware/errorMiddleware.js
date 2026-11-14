@@ -1,47 +1,40 @@
 const errorMiddleware = (err, req, res, next) => {
   console.error(err);
 
-  let statusCode = err.statusCode || 500;
-  let message = err.message || "Internal Server Error";
+  const mysqlErrors = {
+    ER_DUP_ENTRY: {
+      statusCode: 409,
+      message: "Record already exists.",
+    },
 
-  // MySQL duplicate entry
-  if (err.code === "ER_DUP_ENTRY") {
-    statusCode = 409;
-    message = "This record already exists";
-  }
+    ER_NO_REFERENCED_ROW_2: {
+      statusCode: 400,
+      message: "Referenced record does not exist.",
+    },
 
-  // MySQL foreign key constraint
-  else if (err.code === "ER_NO_REFERENCED_ROW_2") {
-    statusCode = 400;
-    message = "Referenced record does not exist";
-  }
+    ER_ROW_IS_REFERENCED_2: {
+      statusCode: 409,
+      message: "Cannot delete this record because it is being used.",
+    },
 
-  // Cannot delete because another record references it
-  else if (err.code === "ER_ROW_IS_REFERENCED_2") {
-    statusCode = 409;
-    message = "This record is being used by another record";
-  }
+    ER_BAD_NULL_ERROR: {
+      statusCode: 400,
+      message: "A required field is missing.",
+    },
 
-  // Cannot insert NULL into a required column
-  else if (err.code === "ER_BAD_NULL_ERROR") {
-    statusCode = 400;
-    message = "A required field is missing";
-  }
+    ER_DATA_TOO_LONG: {
+      statusCode: 400,
+      message: "Input value is too long.",
+    },
+  };
+  
+  const databaseError = mysqlErrors[err.code];
 
-  // Database connection error
-  else if (err.code === "ECONNREFUSED") {
-    statusCode = 503;
-    message = "Database service unavailable";
-  }
+  const statusCode = databaseError?.statusCode || err.statusCode || 500;
 
-  // Don't expose internal errors to clients
-  if (statusCode === 500) {
-    message = "Internal Server Error";
-  }
-
-  if (res.headersSent) {
-    return next(err);
-  }
+  const message =
+    databaseError?.message ||
+    (statusCode === 500 ? "Internal Server Error." : err.message);
 
   res.status(statusCode).json({
     success: false,

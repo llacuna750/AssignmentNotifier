@@ -1,4 +1,14 @@
+/*
+ *
+ *
+ *  Responsibility: Handle business logic and validation.
+ *
+ *
+ *
+ */
+
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 import userRepository from "../users/user.repository.js";
 
@@ -11,12 +21,12 @@ function createError(message, statusCode) {
 async function signUp(userData = {}) {
   const { name, email, password } = userData ?? {};
 
-  if (typeof name !== "string" || !name.trim() || name.trim().length > 255) {
-    throw createError("Name is required and must be 255 characters or fewer.", 400);
-  }
-
   if (typeof email !== "string") {
     throw createError("A valid email is required.", 400);
+  }
+
+  if (typeof password !== "string" || password.length < 8) {
+    throw createError("Password must be at least 8 characters long.", 400);
   }
 
   const normalizedEmail = email.trim().toLowerCase();
@@ -25,16 +35,13 @@ async function signUp(userData = {}) {
     throw createError("A valid email is required.", 400);
   }
 
-  if (typeof password !== "string" || password.length < 8) {
-    throw createError("Password must be at least 8 characters long.", 400);
-  }
-
-  if (Buffer.byteLength(password, "utf8") > 72) {
-    throw createError("Password must be 72 bytes or fewer.", 400);
-  }
-
-  const salt = await bcrypt.genSalt(10)
+  const salt = await bcrypt.genSalt(10);
   const password_hash = await bcrypt.hash(password, salt);
+
+  const token = jwt.sign({ email: email }, process.env.JWT_SECRETS, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+
   const id = await userRepository.create({
     name: name.trim(),
     email: normalizedEmail,
@@ -42,7 +49,7 @@ async function signUp(userData = {}) {
   });
 
   // Return public fields only; the password and hash stay on the server.
-  return { id, name: name.trim(), email: normalizedEmail };
+  return { id, name: name.trim(), email: normalizedEmail.trim() };
 }
 
 export default { signUp };
