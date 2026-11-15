@@ -23,18 +23,17 @@ app.use(logRequest);
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
+// 
+app.use(express.urlencoded({ extended: false }));
 
 // Use the imported routers for specific routes
 app.use("/products", productsRouter);
 
-
 // messages route
 app.use("/messages", messagesRouter);
 
-
 // Path: /api/v1/auth/sign-up (POST)
 app.use("/api/v1/auth/", authRouter);
-
 
 app.get("/", (request, response) =>
   assignmentController.getAll(request, response),
@@ -43,10 +42,10 @@ app.get("/", (request, response) =>
 // Keep the error handler after all routes so it can handle their errors.
 app.use(errorMiddleware);
 
-
 app.listen(port, function () {
   console.log(`Server is running on http://localhost:${port} 🚀`);
 });
+
 /*
   {
     app.get("/", (req, res) => {

@@ -9,6 +9,7 @@
 
 import subjectRepository from "./subject.repository.js";
 import userRepository from "../users/user.repository.js";
+import isPureTextString from "../helper/pureTextChecker.js";
 
 // throw custom message new Error()
 const createError = (message, statusCode) => {
@@ -17,25 +18,13 @@ const createError = (message, statusCode) => {
 
   return error;
 };
-
-/*
- *  Returns true only if it's a string AND not a valid number
- *  isNaN(Number('dwada'))  is Not a number?  true
- *  isNaN(Number('12312'))  is Not a number?  false
- */
-function isPureTextString(...values) {
-  return values.every(
-    (value) => typeof value === "string" && Number.isNaN(Number(value.trim())),
-  );
-}
-
 // Validate subject input
 async function validateInput(userId, title, instructor) {
   // 1. Validate data types
   if (typeof title !== "string" || typeof instructor !== "string") {
     throw createError("Title and instructor must be strings.", 400);
   }
-
+  
   // 2. Remove unnecessary whitespace
   title = title.trim();
   instructor = instructor.trim();

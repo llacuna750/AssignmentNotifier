@@ -1,24 +1,19 @@
-/*
+/**
  *
  *
- *  Responsibility: Handle business logic and validation.
+ * ? Responsibility: Handle business logic and validation.
  *
  *
  *
  */
-
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import userRepository from "../users/user.repository.js";
+import createError from "../helper/errorNamer.js";
+import isPureTextString from "../helper/pureTextChecker.js";
 
-function createError(message, statusCode) {
-  const error = new Error(message);
-  error.statusCode = statusCode;
-  return error;
-}
-
-async function signUp(userData = {}) {
+async function signUp(userData) {
   const { name, email, password } = userData ?? {};
 
   if (typeof email !== "string") {
@@ -50,8 +45,67 @@ async function signUp(userData = {}) {
 
   return {
     token,
-    user: { id: userId, name: name.trim(), email: normalizedEmail, password_hash},
+    user: {
+      id: userId,
+      name: name.trim(),
+      email: normalizedEmail,
+      password_hash,
+    },
   };
 }
 
-export default { signUp };
+async function signIn(userData) {
+  const { email, password } = userData ?? {};
+
+  if (email === undefined || password === undefined) {
+    throw createError("Email or password must required", 400);
+  }
+
+  if (
+    !isPureTextString(email.split("@").filter((element) => element !== "")[0])
+  ) {
+    throw createError(
+      `email must valid and contain text.   example: <String> @example.com`,
+      400,
+    );
+  }
+
+  const user = await userRepository.findByEmail(email);
+  if (!user) {
+    throw createError("User not found!", 404);
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+  if (!isPasswordValid) {
+    throw createError("Invalid password", 401);
+  }
+
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRETS, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
+
+  return {
+    token,
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    },
+  };
+}
+
+async function signOut(userData) {}
+
+{
+  // const email = 'llacuna750@@@gmail.com'
+  // const emailnum = '12314125750@gmail.com'
+  // console.log(email.split("@").filter((element) => element !== "")[0]);
+  // let userData;
+  // let { email, password } = userData ?? {};
+  // email = 'Email'
+  // password = '1231412@'
+  // console.log(email, password)
+}
+
+export default { signUp, signIn, signOut };

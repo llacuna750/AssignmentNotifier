@@ -1,0 +1,70 @@
+2. Common HTTP status codes
+Here are the status codes you'll frequently use when developing REST APIs.
+
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+|    2xx — Success                                                                                                                        |
+|    Successful request                                                                                                                   |
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+|    Code	            Name	                              Common use                                                                  |
+|    200	            OK	                            Successfully retrieved or updated data.                                           |
+|    201	            Created	                        Successfully created a new resource.                                              |
+|    202	            Accepted	                    Request accepted for processing, but not completed yet.                           |
+|    204	            No Content	                    Successfully processed request with no response body.                             |
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+|   3xx — Redirection                                                                                                                     |
+|   Redirection                                                                                                                           |
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+|   Code	                    Name                        	Common use                                                                |
+|   301	                Moved Permanently             	Resource permanently moved to another URL.                                        |
+|   302	                Found	                        Temporary redirection.                                                            |
+|   304	                Not Modified	                Cached resource hasn't changed.                                                   |
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+
+
+|-----------------------------------------------------------------------------------------------------------------------------------------|  
+|  4xx — Client errors                                                                                                                    |
+|  Client request problems                                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+|  Code	        Name	                                    Common use                                                                    |
+|  400	        Bad Request	                            Invalid input, missing required fields, or malformed request.                     |
+|  401	        Unauthorized    	                    Authentication is missing or invalid.                                             |
+|  403	        Forbidden	                            User is authenticated but lacks permission.                                       |
+|  404	        Not Found	                            Requested resource doesn't exist.                                                 |
+|  405	        Method Not                              Allowed	HTTP method isn't supported for that endpoint.                            |
+|  409	        Conflict        	                    Duplicate data or conflicting resource state.                                     |
+|  410	        Gone	                                Resource is permanently unavailable.                                              |
+|  415	        Unsupported Media Type	                Unsupported request content type.                                                 |
+|  422	        Unprocessable Content	                Request is syntactically valid, but its instructions or data cannot be processed. |
+|  429	        Too Many Requests	                    Client exceeded the allowed request rate.                                         |
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+
+
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+|   5xx — Server errors                                                                                                                   |
+|   Server problems                                                                                                                       |
+|-----------------------------------------------------------------------------------------------------------------------------------------|    
+|   Code                        	Name            	                Common use                                                        |
+|   500	                        Internal Server Error	            Unexpected server error.                                              |
+|   501	                        Not Implemented	                    Server doesn't support the requested functionality.                   |     
+|   502	                        Bad Gateway	                        Server received an invalid response from an upstream server.          |
+|   503	                        Service Unavailable	                Server is temporarily unavailable.                                    |
+|   504	                        Gateway Timeout	                    Upstream server didn't respond in time.                               |         
+|-----------------------------------------------------------------------------------------------------------------------------------------|
+
+|---------------------------------------------------------------------------------------------------|
+|       3. Which status codes should you focus on first?                                            |
+|       For your Assignment Notifier backend, I recommend mastering these first:                    |
+|---------------------------------------------------------------------------------------------------|      
+|   Status	                Example in your project                                                 |
+|   200	                Successfully retrieved subjects.                                            |
+|   201	                Successfully created a subject.                                             |
+|   204	                Successfully deleted a subject without returning a body.                    |
+|   400	                Subject title is a number instead of a string.                              |
+|   401	                User hasn't logged in.                                                      |
+|   403	                User tries to access another user's restricted resource.                    |
+|   404	                Subject ID doesn't exist.                                                   |
+|   409	                Subject title already exists.                                               |
+|   500	                Unexpected database or server error.                                        |     
+|---------------------------------------------------------------------------------------------------|
