@@ -1,4 +1,4 @@
-import express, { request, response } from "express";
+import express from "express";
 import cors from "cors";
 import { router as productsRouter } from "./routes/products.js";
 import { router as messagesRouter } from "./routes/messages.js";
@@ -6,6 +6,9 @@ import * as assignmentController from "./modules/assignments/assignment.controll
 import authRouter from "./modules/auth/auth.routes.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 import logRequest from "./middleware/logRequest.js";
+import { userRouter } from "./modules/users/user.routes.js";
+import arcjetMiddleware from "./middleware/arcjet.middleware.js";
+
 
 const app = express();
 const port = 3000;
@@ -17,14 +20,14 @@ app.use(
   }),
 );
 
-// Middleware to log incoming requests
-app.use(logRequest);
-
 // Middleware to parse JSON request bodies
 app.use(express.json());
-
-// 
 app.use(express.urlencoded({ extended: false }));
+app.use(arcjetMiddleware)
+// Keep the error handler after all routes so it can handle their errors.
+app.use(errorMiddleware);
+
+//
 
 // Use the imported routers for specific routes
 app.use("/products", productsRouter);
@@ -35,12 +38,15 @@ app.use("/messages", messagesRouter);
 // Path: /api/v1/auth/sign-up (POST)
 app.use("/api/v1/auth/", authRouter);
 
+// Path: /api/v1/user  (GET)
+app.use("/api/v1/users", userRouter);
+
 app.get("/", (request, response) =>
   assignmentController.getAll(request, response),
 );
 
-// Keep the error handler after all routes so it can handle their errors.
-app.use(errorMiddleware);
+// Middleware to log incoming requests
+app.use(logRequest);
 
 app.listen(port, function () {
   console.log(`Server is running on http://localhost:${port} 🚀`);

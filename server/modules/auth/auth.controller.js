@@ -1,8 +1,8 @@
-import authService from "./auth.service.js";
+import AuthService from "./auth.service.js";
 
 const signUp = async (req, res, next) => {
   try {
-    const result = await authService.signUp(req.body);
+    const result = await AuthService.signUp(req.body);
 
     return res.status(201).json({
       success: true,
@@ -16,7 +16,7 @@ const signUp = async (req, res, next) => {
 
 const signIn = async (req, res, next) => {
   try {
-    const result = await authService.signIn(req.body);
+    const result = await AuthService.signIn(req.body);
 
     return res.status(201).json({
       success: true,
