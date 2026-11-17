@@ -21,7 +21,10 @@ async function signUp(userData) {
   }
 
   if (typeof password !== "string" || password.length < 8) {
-    throw createError("Password must be at least 8 characters long. api/v1/auth/sign-in ⚠️", 400);
+    throw createError(
+      "Password must be at least 8 characters long. api/v1/auth/sign-in ⚠️",
+      400,
+    );
   }
 
   const normalizedEmail = email.trim().toLowerCase();
@@ -36,6 +39,7 @@ async function signUp(userData) {
   const userId = await UserRepository.create({
     name: name.trim(),
     email: normalizedEmail,
+    password_hash,
   });
 
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
@@ -48,7 +52,6 @@ async function signUp(userData) {
       id: userId,
       name: name.trim(),
       email: normalizedEmail,
-      password_hash,
     },
   };
 }

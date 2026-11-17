@@ -9,7 +9,6 @@ import logRequest from "./middleware/logRequest.js";
 import { userRouter } from "./modules/users/user.routes.js";
 import arcjetMiddleware from "./middleware/arcjet.middleware.js";
 
-
 const app = express();
 const port = 3000;
 
@@ -23,11 +22,8 @@ app.use(
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(arcjetMiddleware)
+app.use(arcjetMiddleware);
 // Keep the error handler after all routes so it can handle their errors.
-app.use(errorMiddleware);
-
-//
 
 // Use the imported routers for specific routes
 app.use("/products", productsRouter);
@@ -41,12 +37,14 @@ app.use("/api/v1/auth/", authRouter);
 // Path: /api/v1/user  (GET)
 app.use("/api/v1/users", userRouter);
 
+// Middleware to log incoming requests
+app.use(logRequest);
+
+app.use(errorMiddleware);
+
 app.get("/", (request, response) =>
   assignmentController.getAll(request, response),
 );
-
-// Middleware to log incoming requests
-app.use(logRequest);
 
 app.listen(port, function () {
   console.log(`Server is running on http://localhost:${port} 🚀`);
