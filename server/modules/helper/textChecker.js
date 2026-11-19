@@ -9,9 +9,7 @@ function isPureTextString(...values) {
   );
 }
 
-function isnameNoNumber(name) {
-  return false;
+function isNumberExist(name) {
+  return name.split("").some((v) => Number.isFinite(Number(v)));
 }
-
-console.log(isnameNoNumber("awdawd123"));
-export default { isPureTextString, isnameNoNumber };
+export { isPureTextString, isNumberExist };

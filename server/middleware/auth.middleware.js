@@ -20,7 +20,8 @@ const authorize = async (req, res, next) => {
       });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
+    
+    console.log("Authorize decoded: ",decoded)
     const user = await UserRepository.findById(decoded.userId);
 
     if (!user)
@@ -37,4 +38,16 @@ const authorize = async (req, res, next) => {
   }
 };
 
+const requireAdmin = (req, res, next) => {
+  if (req.user?.role !== "admin") {
+    return res.status(403).json({
+      success: false,
+      message: "Admin access required.",
+    });
+  }
+
+  next();
+};
+
+export { requireAdmin };
 export default authorize;

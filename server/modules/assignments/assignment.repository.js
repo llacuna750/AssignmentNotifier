@@ -1,42 +1,58 @@
-/*
+/**
 * 
 * 
-* Responsibility: Receive HTTP requests,
-* communicate with the service, and return HTTP responses.
+* ? Responsibility: Receive HTTP requests,
+* ? communicate with the service, and return HTTP responses.
 * 
 * 
 */
 import pool from "../../config/database.js";
 
-async function findAll() {
-  const [allAssignment] = await pool.query(`SELECT * FROM assignments`);
+async function findAll(userId) {
+  const [allAssignment] = await pool.execute(
+    `SELECT assignments.id, assignments.title, assignments.due_date,
+            assignments.status, assignments.subject_id, assignments.created_at
+       FROM assignments
+       INNER JOIN subjects ON subjects.id = assignments.subject_id
+       WHERE subjects.user_id = ?
+       ORDER BY assignments.due_date ASC`,
+    [userId],
+  );
   return allAssignment;
 }
 
-async function findById(id) {
-  const [assignmentSelected] = await pool.query(
-    `SELECT * 
-      FROM assignments
-      WHERE id = ?
-      `,
-    [id],
+async function findByIdForUser(id, userId) {
+  const [assignmentSelected] = await pool.execute(
+    `SELECT assignments.id, assignments.title, assignments.due_date,
+            assignments.status, assignments.subject_id, assignments.created_at
+       FROM assignments
+       INNER JOIN subjects ON subjects.id = assignments.subject_id
+       WHERE assignments.id = ? AND subjects.user_id = ?`,
+    [id, userId],
   );
   return assignmentSelected[0];
 }
 
-async function create(title, due_date, subject_id) {
-  const [created] = await pool.query(
-    `INSERT INTO assignments (title, due_date, subject_id) 
-    VALUES (?, ?, ?)`,
-    [title, due_date, subject_id],
+async function createForUser(title, dueDate, subjectId, userId) {
+  const [created] = await pool.execute(
+    `INSERT INTO assignments (title, due_date, subject_id)
+     SELECT ?, ?, subjects.id
+       FROM subjects
+       WHERE subjects.id = ? AND subjects.user_id = ?`,
+    [title, dueDate, subjectId, userId],
   );
-  return findById(created.insertId);
+  if (created.affectedRows === 0) return null;
+
+  return findByIdForUser(created.insertId, userId);
 }
 
-async function deleteById(id) {
-  const [targetDel] = await pool.query(
-    `DELETE FROM assignments WHERE id = ? `,
-    [id],
+async function deleteByIdForUser(id, userId) {
+  const [targetDel] = await pool.execute(
+    `DELETE assignments
+       FROM assignments
+       INNER JOIN subjects ON subjects.id = assignments.subject_id
+       WHERE assignments.id = ? AND subjects.user_id = ?`,
+    [id, userId],
   );
   return targetDel.affectedRows > 0;
 }
@@ -50,4 +66,9 @@ async function deleteById(id) {
 
 
 
-export { findAll, findById, create, deleteById };
+export {
+  findAll,
+  findByIdForUser,
+  createForUser,
+  deleteByIdForUser,
+};

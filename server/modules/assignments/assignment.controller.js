@@ -9,31 +9,37 @@
 */
 
 import * as assignmentService from "./assignment.service.js";
-import express from "express";
-
-async function getAll(req, res) {
+async function getAll(req, res, next) {
   try {
-    const result = await assignmentService.getAllAssignments();
+    const result = await assignmentService.getAllAssignments(req.user.id);
     return res.status(200).json(result); // Sends the data back to the client
   } catch (error) {
-    return res.status(500).json({ error: error.message }); // Handles errors gracefully
+    return next(error);
   }
 }
 
-async function getById(req, res) {
+async function getById(req, res, next) {
   try {
     const selectedItem = await assignmentService.getAssignmentById(
       req.params.id,
+      req.user.id,
     );
+
+    if (!selectedItem) {
+      return res.status(404).json({
+        success: false,
+        message: "Assignment not found.",
+      });
+    }
 
     return res.status(200).json({
       success: true,
-      message: '',
-      data: selectedItem
+      message: "Assignment found",
+      data: selectedItem,
     });
   } catch (error) {
-    return res.assignmentService.status(500).json({ error: error.message });
+    return next(error);
   }
 }
 
-export { getAll };
+export { getAll, getById };

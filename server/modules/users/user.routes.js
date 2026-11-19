@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { getUsers, getUser } from "../users/user.controller.js";
-import authorize from "../../middleware/auth.middleware.js";
+import { getUsers, getUser, getMe } from "../users/user.controller.js";
+import authorize, { requireAdmin } from "../../middleware/auth.middleware.js";
 const userRouter = Router();
 
-userRouter.get("/", authorize, getUsers);
+userRouter.get("/me", authorize, getMe);
+userRouter.get("/", authorize, requireAdmin, getUsers);
 userRouter.get("/:id", authorize, getUser);
 
 export { userRouter };

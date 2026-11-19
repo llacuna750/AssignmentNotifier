@@ -14,7 +14,8 @@ const aj = arcjet({
       mode: "LIVE", // Blocks requests. Use "DRY_RUN" to log only
       // Block all bots except the following
       allow: [ 
-        "CATEGORY:SEARCH_ENGINE", "POSTMAN"
+        "CATEGORY:SEARCH_ENGINE", 
+        "POSTMAN"
         // Google, Bing, etc
         // Uncomment to allow these other common bot categories
         // See the full list at https://arcjet.com/bot-list
@@ -28,7 +29,7 @@ const aj = arcjet({
       mode: "LIVE",
       // Tracked by IP address by default, but this can be customized
       // See https://docs.arcjet.com/fingerprints
-      //characteristics: ["ip.src"],
+      // characteristics: ["ip.src"],
       refillRate: 5, // Refill 5 tokens per interval
       interval: 25, // Refill every 25 seconds
       capacity: 10, // Bucket capacity of 10 tokens
