@@ -11,13 +11,17 @@ import jwt from "jsonwebtoken";
 
 import UserRepository from "../users/user.repository.js";
 import createError from "../helper/errorNamer.js";
-import isPureTextString from "../helper/pureTextChecker.js";
+import isPureTextString from "../helper/textChecker.js";
 
 async function signUp(userData) {
   const { name, email, password } = userData ?? {};
 
   if (typeof email !== "string") {
     throw createError("A valid email is required. ⚠️", 400);
+  }
+
+  if (!isPureTextString(name)) {
+    throw createError("Enter your proper name.", 400);
   }
 
   if (typeof password !== "string" || password.length < 8) {

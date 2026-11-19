@@ -23,7 +23,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(arcjetMiddleware);
-// Keep the error handler after all routes so it can handle their errors.
+
+// Middleware to log incoming requests
+app.use(logRequest);
 
 // Use the imported routers for specific routes
 app.use("/products", productsRouter);
@@ -37,9 +39,7 @@ app.use("/api/v1/auth/", authRouter);
 // Path: /api/v1/user  (GET)
 app.use("/api/v1/users", userRouter);
 
-// Middleware to log incoming requests
-app.use(logRequest);
-
+// Keep the error handler after all routes so it can handle their errors.
 app.use(errorMiddleware);
 
 app.get("/", (request, response) =>

@@ -18,7 +18,7 @@ const signIn = async (req, res, next) => {
   try {
     const result = await AuthService.signIn(req.body);
 
-    return res.status(201).json({
+    return res.status(200).json({
       success: true,
       message: "Signed in successfully!!",
       data: result,
