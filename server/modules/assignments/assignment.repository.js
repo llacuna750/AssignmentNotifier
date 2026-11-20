@@ -57,13 +57,6 @@ async function deleteByIdForUser(id, userId) {
   return targetDel.affectedRows > 0;
 }
 
-// async function updateById(id) {
-//   const targetID = await pool.query(`UPDATE assignment
-//   set `);
-// }
-
-// console.log(await deleteById(1))
-
 
 
 export {

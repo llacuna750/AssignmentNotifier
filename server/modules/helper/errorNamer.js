@@ -3,4 +3,3 @@ export default function createError(message, statusCode) {
   error.statusCode = statusCode;
   return error;
 }
-

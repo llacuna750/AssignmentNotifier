@@ -19,9 +19,8 @@ const authorize = async (req, res, next) => {
         message: `User hasn't logged in. / Unauthorized 🙁`,
       });
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // ? return sample { userId: 85, iat: 1795146369, exp: 1795232769 }
     
-    console.log("Authorize decoded: ",decoded)
     const user = await UserRepository.findById(decoded.userId);
 
     if (!user)

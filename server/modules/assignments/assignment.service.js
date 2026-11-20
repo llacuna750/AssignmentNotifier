@@ -6,7 +6,7 @@
 * 
 */
 
-import * as assignmentRepository from "./assignment.repository.js";
+import * as AssignmentRepository from "./assignment.repository.js";
 
 const createError = (message, statusCode) => {
   const error = new Error(message);
@@ -18,19 +18,19 @@ const createError = (message, statusCode) => {
 
 // Retrieve all assignments
 async function getAllAssignments(userId) {
-  return await assignmentRepository.findAll(userId);
+  return await AssignmentRepository.findAll(userId);
 }
 
 
 // Retrieve assignment by ID
 async function getAssignmentById(id, userId) {
-  const assignment = await assignmentRepository.findByIdForUser(id, userId);
+  const assignment = await AssignmentRepository.findByIdForUser(id, userId);
   return assignment;
 }
 
 
 async function createAssignment(title, dueDate, subjectId, userId) {
-  const assignmentCreate = await assignmentRepository.createForUser(
+  const assignmentCreate = await AssignmentRepository.createForUser(
     title,
     dueDate,
     subjectId,
@@ -46,7 +46,7 @@ async function createAssignment(title, dueDate, subjectId, userId) {
 
 
 async function deleteAssignmentById(id, userId) {
-  const assignmentDelete = await assignmentRepository.deleteByIdForUser(id, userId);
+  const assignmentDelete = await AssignmentRepository.deleteByIdForUser(id, userId);
   return assignmentDelete;
 }
 

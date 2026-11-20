@@ -1,30 +1,24 @@
-/*
+/**
  *
  *
- *  Responsibility: Handle business logic and validation.
+ *  Todo: Responsibility: Handle business logic and validation.
  *
  *
  *
  */
 
-import subjectRepository from "./subject.repository.js";
+import * as SubjectRepository from "./subject.repository.js";
 import userRepository from "../users/user.repository.js";
-import isPureTextString from "../helper/pureTextChecker.js";
+import { isPureTextString } from "../helper/textChecker.js";
+import createError from "../helper/errorNamer.js"; // ! Catch Error issue status Code
 
-// throw custom message new Error()
-const createError = (message, statusCode) => {
-  const error = new Error(message);
-  error.errorStatus = statusCode;
-
-  return error;
-};
 // Validate subject input
 async function validateInput(userId, title, instructor) {
   // 1. Validate data types
   if (typeof title !== "string" || typeof instructor !== "string") {
     throw createError("Title and instructor must be strings.", 400);
   }
-  
+
   // 2. Remove unnecessary whitespace
   title = title.trim();
   instructor = instructor.trim();
@@ -47,7 +41,7 @@ async function validateInput(userId, title, instructor) {
   }
 
   // 6. Check for duplicate subjects
-  const isDuplicatedEntry = (await getAllSubjects()).some(
+  const isDuplicatedEntry = (await getUserSubjects(userId)).some(
     (item) => item.title === title && item.instructor === instructor,
   );
 
@@ -64,22 +58,26 @@ async function validateInput(userId, title, instructor) {
 }
 
 // Create subject
-async function createAssignment(user_Id, title, instructor) {
-  const data = await validateInput(user_Id, title, instructor);
+async function addAssignment(input) {
+  const { user, title, instructor } = input;
+
   try {
-    return subjectRepository.create(data.userId, data.title, data.instructor);
+    const data = await validateInput(user, title, instructor);
+    return SubjectRepository.create(data.userId, data.title, data.instructor);
   } catch (error) {
     throw error;
   }
 }
 
 // Retrieve all subjects
-async function getAllSubjects() {
-  return await subjectRepository.getAll();
+async function getUserSubjects(userId) {
+  return await SubjectRepository.getAll(userId);
 }
 
 // Retrieve subject by ID
 async function getSubjectById(id) {
-  const [subjectSelected] = await subjectRepository.findById(id);
+  const [subjectSelected] = await SubjectRepository.findById(id);
   return subjectSelected;
 }
+
+export { addAssignment, getUserSubjects, getSubjectById };

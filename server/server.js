@@ -9,6 +9,7 @@ import logRequest from "./middleware/logRequest.js";
 import { userRouter } from "./modules/users/user.routes.js";
 import arcjetMiddleware from "./middleware/arcjet.middleware.js";
 import authorize from "./middleware/auth.middleware.js";
+import subjectRouter from "./modules/subjects/subject.routes.js";
 
 const app = express();
 const port = 3000;
@@ -38,10 +39,11 @@ app.use("/messages", messagesRouter);
 app.use("/api/v1/auth/", authRouter);
 
 // Path: /api/v1/user  (GET)
-app.use("/api/v1/users", userRouter);
+app.use("/api/v1/users/", userRouter);
+
+app.use("/api/v1/subjects/", subjectRouter);
 
 app.get("/", authorize, assignmentController.getAll);
-
 
 // Keep the error handler after all routes so it can handle their errors.
 app.use(errorMiddleware);
