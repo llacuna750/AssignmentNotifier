@@ -18,7 +18,7 @@ function toggleSideBarState() {
 function sidebarView() {
     const sidebarLayout = document.getElementById('sidebar')
     const menuItems = document.querySelectorAll(
-        "#home-assTask-calender p, #burger > div"
+        "#home-assTask-calender span, #burger > div"
     )
     if (!sidebarLayout) return;
 

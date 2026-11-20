@@ -1,138 +1,305 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assignment Notifier App</title>
+    <meta name="theme-color" content="#f2f5fb" />
+    <meta
+      name="description"
+      content="Sign in to Assignment Notifier and keep your coursework on track."
+    />
+    <title>Sign in | Assignment Notifier</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="../node_modules/hover.css/css/hover.css">
-</head>
+    <link rel="stylesheet" href="../node_modules/hover.css/css/hover.css" />
+  </head>
 
-<body>
-    <!-- <div class="container container-toggle-hide" id="sidebar"> -->
-    <div id="sidebar">
-        <div class="collapsible-bar">
-            <div class="title-app-hac">
-                <div class="hamburger" id="burger">
-                    <img class="hvr-bounce-in" src="./images/hamburger.svg" alt="harburger.svg" id="hamburger" />
-                    <div class="hide-hamburger-menu">
-                        <img src="./images/logo-titleApp.svg" alt="logoTitleApp">
-                        <h2>Assignment <br> Notifier</h2>
-                    </div>
-                </div>
+  <body>
+    <a class="skip-link" id="skip-link" href="#auth-main">Skip to main content</a>
 
-                <div class="home-assTask-calender" id="home-assTask-calender">
-                    <div class="dashboardIcon hvr-bounce-in">
-                        <img src="./images/dashboard.svg" alt="dashboard.svg" />
-                        <p class="hide-hamburger-menu">Dashboard</p>
-                    </div>
-                    <div class="AssignmentTask hvr-bounce-in">
-                        <img src="./images/AssignmentTask.svg" alt="AssignmentTask.svg" />
-                        <p class="hide-hamburger-menu">All Assignments</p>
-                    </div>
-                    <div class="calendarSvg hvr-bounce-in">
-                        <img src="./images/calendar.svg" alt="calendarSvg" />
-                        <p class="hide-hamburger-menu">Calendar</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="auth-screen" id="auth-screen">
+      <div class="auth-layout">
+        <section class="auth-story" aria-labelledby="story-title">
+          <a class="brand brand-light" href="#auth-screen" aria-label="Assignment Notifier home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none">
+                <rect x="4" y="4" width="32" height="32" rx="11" fill="currentColor" />
+                <path d="M13 20.5 18 25l10-11" stroke="#17377A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span>Assignment <strong>Notifier</strong></span>
+          </a>
 
-        <div class="dashboard-container">
-            <div class="dashboard-header">
-                <div class="dashboard-text hvr-wobble-top">
-                    <p>Dashboard</p>
-                </div>
-                <div class="add-buttons">
-                    <div class="add-subject hvr-wobble-top">
-                        <img src="./images/bluePlus.svg" alt="Blueplus.svg" />
-                        <p>Add Subject</p>
-                    </div>
+          <div class="story-content">
+            <p class="eyebrow"><span class="eyebrow-dot"></span> A calmer way to study</p>
+            <h1 id="story-title">Make room for the work that matters.</h1>
+            <p class="story-description">
+              Keep deadlines clear, make steady progress, and spend less time
+              wondering what is due next.
+            </p>
 
-                    <div class="add-assignment hvr-wobble-top">
-                        <img src="./images/whitePlus.svg" alt="whitePlus.svg" />
-                        <p>Add Assignment</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="stats">
+            <div class="study-preview" aria-label="Example assignment overview">
+              <div class="preview-heading">
                 <div>
-                    <p>Total Tasks</p>
-                    <p id="total-task">0</p>
+                  <span class="preview-label">YOUR WEEK, AT A GLANCE</span>
+                  <p>Small steps add up.</p>
                 </div>
-                <div>
-                    <p>Pending</p>
-                    <p id="pending-task">0</p>
-                </div>
-                <div>
-                    <p>In Progress</p>
-                    <p>0</p>
-                </div id="in-progress-task">
-                <div>
-                    <p>Completed</p>
-                    <p>0</p>
-                </div>
+                <span class="preview-sparkle" aria-hidden="true">✦</span>
+              </div>
+              <div class="preview-task">
+                <span class="preview-check" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" fill="none"><path d="m5 10 3.2 3.2L15 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+                <span class="preview-task-copy"><strong>Literature review</strong><small>Research methods</small></span>
+                <span class="preview-date">TODAY</span>
+              </div>
+              <div class="preview-task preview-task-muted">
+                <span class="preview-check preview-check-open" aria-hidden="true"><span></span></span>
+                <span class="preview-task-copy"><strong>Problem set 04</strong><small>Calculus II</small></span>
+                <span class="preview-date">FRI</span>
+              </div>
+              <div class="preview-progress-row">
+                <span>Weekly progress</span><strong>2 of 4 tasks</strong>
+              </div>
+              <div class="preview-progress" aria-hidden="true"><span></span></div>
+            </div>
+          </div>
+
+          <p class="story-footer">A little more focus. A lot less last-minute stress.</p>
+          <span class="story-orbit story-orbit-one" aria-hidden="true"></span>
+          <span class="story-orbit story-orbit-two" aria-hidden="true"></span>
+        </section>
+
+        <section class="auth-panel" id="auth-main" tabindex="-1" aria-label="Account access">
+          <div class="auth-card">
+            <div class="mobile-brand brand">
+              <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 40 40" fill="none">
+                  <rect x="4" y="4" width="32" height="32" rx="11" fill="currentColor" />
+                  <path d="M13 20.5 18 25l10-11" stroke="#17377A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span>Assignment <strong>Notifier</strong></span>
             </div>
 
-            <div class="status-assignment-container">
-                <div class="view-All">
-                    <p class="hvr-bob">View All</p>
-                </div>
+            <p class="auth-kicker">YOUR PERSONAL STUDY SPACE</p>
+            <h2 class="auth-heading" id="auth-heading">Welcome back</h2>
+            <p class="auth-intro" id="auth-intro">Sign in to pick up where you left off.</p>
 
-                <!-- sample added assignment data  -->
-                <div class="sample-data">
-                    <div class="info-status">
-                        <div class="sub-img-tAss-ins-due">
-                            <img src="./images/drVegapunk.jpeg" alt="drVegapunk">
-                            <div>
-                                <h5 class="subject-title-assignment" id="s-ta">Physics & Theoretical Science -
-                                    Mass-energy equivalence (E = mc²)</h5>
-                                <p class="instructor" id="instructor">Albert Einstein</p>
-                                <p class="due-date" id="d-date"><span>Due date: </span>Nov 3, 2026</p>
-                            </div>
-                        </div>
-                        <div class="logo-status">
-                            <div class="status-effect">
-                                <div class="sleep-animation">
-                                    <div class="z z-1">Z</div>
-                                    <div class="z z-2">Z</div>
-                                    <div class="z z-3">Z</div>
-                                    <div class="z z-4">Z</div>
-                                </div>
-                            </div>
-                            <div class="clock-icon-pending">
-                                <img src="./images/pending-icon.svg" alt="pending-icon">
-                                <p>
-                                    <b> Pending</b>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="start-action">
-
-                        <div class="hvr-bounce-out">
-                            <img src="./images/edit-icon.svg" alt="Edit">
-                        </div>
-
-                        <div class="hvr-bounce-out">
-                            <img src="./images/delete-icon.svg" alt="Delete">
-                        </div>
-
-                        <div class="hvr-bounce-out">
-                            <img src="./images/play-icon.svg" alt="Play">
-                        </div>
-
-                    </div>
-                </div>
+            <div class="auth-switch" aria-label="Choose an account action">
+              <button class="auth-switch-button is-active" id="show-sign-in" type="button" aria-pressed="true" aria-controls="sign-in-form">
+                Sign in
+              </button>
+              <button class="auth-switch-button" id="show-sign-up" type="button" aria-pressed="false" aria-controls="sign-up-form">
+                Create account
+              </button>
             </div>
-        </div>
+
+            <p class="form-feedback" id="auth-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+
+            <form
+              id="sign-in-form"
+              class="auth-form"
+              action="http://localhost:3000/api/v1/auth/sign-in"
+              method="post"
+              aria-labelledby="auth-heading"
+            >
+              <div class="form-field">
+                <label for="sign-in-email">Email address <span aria-hidden="true">*</span></label>
+                <input
+                  class="field-control"
+                  id="sign-in-email"
+                  name="email"
+                  type="email"
+                  autocomplete="username"
+                  autocapitalize="none"
+                  autocorrect="off"
+                  spellcheck="false"
+                  inputmode="email"
+                  enterkeyhint="next"
+                  maxlength="254"
+                  aria-describedby="sign-in-email-hint"
+                  data-hint="sign-in-email-hint"
+                  data-error="sign-in-email-error"
+                  required
+                />
+                <span class="field-hint" id="sign-in-email-hint">Use the email address linked to your account.</span>
+                <span class="field-error" id="sign-in-email-error">Error: enter a valid email address.</span>
+              </div>
+
+              <div class="form-field">
+                <div class="label-line">
+                  <label for="sign-in-password">Password <span aria-hidden="true">*</span></label>
+                </div>
+                <div class="password-control">
+                  <input
+                    class="field-control"
+                    id="sign-in-password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    enterkeyhint="done"
+                    aria-describedby="sign-in-password-hint"
+                    data-hint="sign-in-password-hint"
+                    data-error="sign-in-password-error"
+                    required
+                  />
+                  <button class="password-toggle" type="button" aria-controls="sign-in-password" aria-pressed="false" aria-label="Show password">Show</button>
+                </div>
+                <span class="field-hint" id="sign-in-password-hint">Your password is case-sensitive.</span>
+                <span class="field-error" id="sign-in-password-error">Error: enter your password.</span>
+              </div>
+
+              <button class="submit-button" type="submit">
+                <span class="button-label">Sign in</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <p class="form-switch-copy">New to Assignment Notifier? <button class="text-button" type="button" data-open-form="sign-up">Create an account</button></p>
+            </form>
+
+            <form
+              id="sign-up-form"
+              class="auth-form"
+              action="http://localhost:3000/api/v1/auth/sign-up"
+              method="post"
+              aria-labelledby="auth-heading"
+              hidden
+            >
+              <div class="form-field">
+                <label for="sign-up-name">Full name <span aria-hidden="true">*</span></label>
+                <input
+                  class="field-control"
+                  id="sign-up-name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  enterkeyhint="next"
+                  minlength="2"
+                  maxlength="100"
+                  aria-describedby="sign-up-name-hint"
+                  data-hint="sign-up-name-hint"
+                  data-error="sign-up-name-error"
+                  required
+                />
+                <span class="field-hint" id="sign-up-name-hint">Enter the name you want to see on your dashboard.</span>
+                <span class="field-error" id="sign-up-name-error">Error: enter your name.</span>
+              </div>
+
+              <div class="form-field">
+                <label for="sign-up-email">Email address <span aria-hidden="true">*</span></label>
+                <input
+                  class="field-control"
+                  id="sign-up-email"
+                  name="email"
+                  type="email"
+                  autocomplete="username"
+                  autocapitalize="none"
+                  autocorrect="off"
+                  spellcheck="false"
+                  inputmode="email"
+                  enterkeyhint="next"
+                  maxlength="254"
+                  aria-describedby="sign-up-email-hint"
+                  data-hint="sign-up-email-hint"
+                  data-error="sign-up-email-error"
+                  required
+                />
+                <span class="field-hint" id="sign-up-email-hint">We will use this to sign you in.</span>
+                <span class="field-error" id="sign-up-email-error">Error: enter an email address in the format you@example.com.</span>
+              </div>
+
+              <div class="form-field">
+                <label for="sign-up-password">Create a password <span aria-hidden="true">*</span></label>
+                <div class="password-control">
+                  <input
+                    class="field-control"
+                    id="sign-up-password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    enterkeyhint="done"
+                    aria-describedby="sign-up-password-hint"
+                    data-hint="sign-up-password-hint"
+                    data-error="sign-up-password-error"
+                    required
+                  />
+                  <button class="password-toggle" type="button" aria-controls="sign-up-password" aria-pressed="false" aria-label="Show password">Show</button>
+                </div>
+                <span class="field-hint" id="sign-up-password-hint">Use at least 8 characters. You can paste from a password manager.</span>
+                <span class="field-error" id="sign-up-password-error">Error: use at least 8 characters.</span>
+              </div>
+
+              <button class="submit-button" type="submit">
+                <span class="button-label">Create account</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <p class="form-switch-copy">Already have an account? <button class="text-button" type="button" data-open-form="sign-in">Sign in</button></p>
+            </form>
+          </div>
+          <p class="auth-footnote">Your assignments stay organized in one simple place.</p>
+        </section>
+      </div>
     </div>
 
+    <div id="sidebar" class="container app-dashboard" hidden>
+      <aside class="collapsible-bar" aria-label="Dashboard sidebar">
+        <div class="title-app-hac">
+          <div class="hamburger" id="burger">
+            <button class="icon-button" type="button" aria-label="Toggle sidebar" aria-controls="home-assTask-calender" id="hamburger-button">
+              <img class="hvr-bounce-in" src="./images/hamburger.svg" alt="" id="hamburger" />
+            </button>
+            <div class="hide-hamburger-menu">
+              <img src="./images/logo-titleApp.svg" alt="" />
+              <h2>Assignment <br />Notifier</h2>
+            </div>
+          </div>
 
+          <nav class="home-assTask-calender" id="home-assTask-calender" aria-label="Main navigation">
+            <a class="dashboardIcon hvr-bounce-in" href="#dashboard-content" aria-current="page">
+              <img src="./images/dashboard.svg" alt="" />
+              <span class="hide-hamburger-menu">Dashboard</span>
+            </a>
+            <a class="AssignmentTask hvr-bounce-in" href="#assignment-list">
+              <img src="./images/AssignmentTask.svg" alt="" />
+              <span class="hide-hamburger-menu">All Assignments</span>
+            </a>
+            <a class="calendarSvg hvr-bounce-in" href="#assignment-list">
+              <img src="./images/calendar.svg" alt="" />
+              <span class="hide-hamburger-menu">Calendar</span>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="dashboard-container" id="dashboard-content" tabindex="-1">
+        <header class="dashboard-header">
+          <div class="dashboard-text"><p>Dashboard</p><span class="dashboard-subtitle">A clear view of what is coming up.</span></div>
+          <div class="account-actions">
+            <span class="welcome-label">Welcome, <strong id="welcome-user">Student</strong></span>
+            <button class="logout-button" id="logout-button" type="button">Sign out</button>
+          </div>
+        </header>
+
+        <section class="stats" aria-label="Assignment overview">
+          <div><p>Total tasks</p><p id="total-task">0</p></div>
+          <div><p>Pending</p><p id="pending-task">0</p></div>
+          <div><p>In progress</p><p id="in-progress-task">0</p></div>
+          <div><p>Completed</p><p id="completed-task">0</p></div>
+        </section>
+
+        <section class="assignment-section" aria-labelledby="assignment-heading">
+          <div class="assignment-section-heading">
+            <div><p class="section-kicker">YOUR COURSEWORK</p><h1 id="assignment-heading">Upcoming assignments</h1></div>
+            <span class="assignment-count" id="assignment-count">0 tasks</span>
+          </div>
+          <div class="assignment-list" id="assignment-list" aria-live="polite" aria-busy="false">
+            <p class="empty-state">Your assignments will appear here after you sign in.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./js/auth.js"></script>
     <script type="module" src="./js/sidebar.js"></script>
-</body>
-
+  </body>
 </html>

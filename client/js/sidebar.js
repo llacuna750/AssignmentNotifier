@@ -1,7 +1,7 @@
 import { sidebarStateValidator, toggleSideBarState, sidebarView } from './stateSidebar.js';
 
 export function sidebarStateChanger () {
-    const hamburger = document.getElementById('hamburger');
+    const hamburger = document.getElementById('hamburger-button');
     if (!hamburger) return;
 
     // Use the default only when there is no saved state yet.
