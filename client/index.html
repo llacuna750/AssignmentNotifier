@@ -30,43 +30,8 @@
           </a>
 
           <div class="story-content">
-            <p class="eyebrow"><span class="eyebrow-dot"></span> A calmer way to study</p>
-            <h1 id="story-title">Make room for the work that matters.</h1>
-            <p class="story-description">
-              Keep deadlines clear, make steady progress, and spend less time
-              wondering what is due next.
-            </p>
-
-            <div class="study-preview" aria-label="Example assignment overview">
-              <div class="preview-heading">
-                <div>
-                  <span class="preview-label">YOUR WEEK, AT A GLANCE</span>
-                  <p>Small steps add up.</p>
-                </div>
-                <span class="preview-sparkle" aria-hidden="true">✦</span>
-              </div>
-              <div class="preview-task">
-                <span class="preview-check" aria-hidden="true">
-                  <svg viewBox="0 0 20 20" fill="none"><path d="m5 10 3.2 3.2L15 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-                </span>
-                <span class="preview-task-copy"><strong>Literature review</strong><small>Research methods</small></span>
-                <span class="preview-date">TODAY</span>
-              </div>
-              <div class="preview-task preview-task-muted">
-                <span class="preview-check preview-check-open" aria-hidden="true"><span></span></span>
-                <span class="preview-task-copy"><strong>Problem set 04</strong><small>Calculus II</small></span>
-                <span class="preview-date">FRI</span>
-              </div>
-              <div class="preview-progress-row">
-                <span>Weekly progress</span><strong>2 of 4 tasks</strong>
-              </div>
-              <div class="preview-progress" aria-hidden="true"><span></span></div>
-            </div>
+            <h1 id="story-title">Stay on top of your assignments.</h1>
           </div>
-
-          <p class="story-footer">A little more focus. A lot less last-minute stress.</p>
-          <span class="story-orbit story-orbit-one" aria-hidden="true"></span>
-          <span class="story-orbit story-orbit-two" aria-hidden="true"></span>
         </section>
 
         <section class="auth-panel" id="auth-main" tabindex="-1" aria-label="Account access">
@@ -81,9 +46,7 @@
               <span>Assignment <strong>Notifier</strong></span>
             </div>
 
-            <p class="auth-kicker">YOUR PERSONAL STUDY SPACE</p>
             <h2 class="auth-heading" id="auth-heading">Welcome back</h2>
-            <p class="auth-intro" id="auth-intro">Sign in to pick up where you left off.</p>
 
             <div class="auth-switch" aria-label="Choose an account action">
               <button class="auth-switch-button is-active" id="show-sign-in" type="button" aria-pressed="true" aria-controls="sign-in-form">
@@ -104,7 +67,7 @@
               aria-labelledby="auth-heading"
             >
               <div class="form-field">
-                <label for="sign-in-email">Email address <span aria-hidden="true">*</span></label>
+                <label for="sign-in-email">Email <span aria-hidden="true">*</span></label>
                 <input
                   class="field-control"
                   id="sign-in-email"
@@ -117,19 +80,14 @@
                   inputmode="email"
                   enterkeyhint="next"
                   maxlength="254"
-                  aria-describedby="sign-in-email-hint"
-                  data-hint="sign-in-email-hint"
                   data-error="sign-in-email-error"
                   required
                 />
-                <span class="field-hint" id="sign-in-email-hint">Use the email address linked to your account.</span>
                 <span class="field-error" id="sign-in-email-error">Error: enter a valid email address.</span>
               </div>
 
               <div class="form-field">
-                <div class="label-line">
-                  <label for="sign-in-password">Password <span aria-hidden="true">*</span></label>
-                </div>
+                <label for="sign-in-password">Password <span aria-hidden="true">*</span></label>
                 <div class="password-control">
                   <input
                     class="field-control"
@@ -138,14 +96,11 @@
                     type="password"
                     autocomplete="current-password"
                     enterkeyhint="done"
-                    aria-describedby="sign-in-password-hint"
-                    data-hint="sign-in-password-hint"
                     data-error="sign-in-password-error"
                     required
                   />
                   <button class="password-toggle" type="button" aria-controls="sign-in-password" aria-pressed="false" aria-label="Show password">Show</button>
                 </div>
-                <span class="field-hint" id="sign-in-password-hint">Your password is case-sensitive.</span>
                 <span class="field-error" id="sign-in-password-error">Error: enter your password.</span>
               </div>
 
@@ -153,7 +108,7 @@
                 <span class="button-label">Sign in</span>
                 <svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
               </button>
-              <p class="form-switch-copy">New to Assignment Notifier? <button class="text-button" type="button" data-open-form="sign-up">Create an account</button></p>
+              <p class="form-switch-copy">New here? <button class="text-button" type="button" data-open-form="sign-up">Create account</button></p>
             </form>
 
             <form
@@ -165,7 +120,7 @@
               hidden
             >
               <div class="form-field">
-                <label for="sign-up-name">Full name <span aria-hidden="true">*</span></label>
+                <label for="sign-up-name">Name <span aria-hidden="true">*</span></label>
                 <input
                   class="field-control"
                   id="sign-up-name"
@@ -175,17 +130,14 @@
                   enterkeyhint="next"
                   minlength="2"
                   maxlength="100"
-                  aria-describedby="sign-up-name-hint"
-                  data-hint="sign-up-name-hint"
                   data-error="sign-up-name-error"
                   required
                 />
-                <span class="field-hint" id="sign-up-name-hint">Enter the name you want to see on your dashboard.</span>
                 <span class="field-error" id="sign-up-name-error">Error: enter your name.</span>
               </div>
 
               <div class="form-field">
-                <label for="sign-up-email">Email address <span aria-hidden="true">*</span></label>
+                <label for="sign-up-email">Email <span aria-hidden="true">*</span></label>
                 <input
                   class="field-control"
                   id="sign-up-email"
@@ -198,17 +150,14 @@
                   inputmode="email"
                   enterkeyhint="next"
                   maxlength="254"
-                  aria-describedby="sign-up-email-hint"
-                  data-hint="sign-up-email-hint"
                   data-error="sign-up-email-error"
                   required
                 />
-                <span class="field-hint" id="sign-up-email-hint">We will use this to sign you in.</span>
                 <span class="field-error" id="sign-up-email-error">Error: enter an email address in the format you@example.com.</span>
               </div>
 
               <div class="form-field">
-                <label for="sign-up-password">Create a password <span aria-hidden="true">*</span></label>
+                <label for="sign-up-password">Password <span aria-hidden="true">*</span></label>
                 <div class="password-control">
                   <input
                     class="field-control"
@@ -225,7 +174,7 @@
                   />
                   <button class="password-toggle" type="button" aria-controls="sign-up-password" aria-pressed="false" aria-label="Show password">Show</button>
                 </div>
-                <span class="field-hint" id="sign-up-password-hint">Use at least 8 characters. You can paste from a password manager.</span>
+                <span class="field-hint" id="sign-up-password-hint">At least 8 characters.</span>
                 <span class="field-error" id="sign-up-password-error">Error: use at least 8 characters.</span>
               </div>
 
@@ -233,10 +182,9 @@
                 <span class="button-label">Create account</span>
                 <svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
               </button>
-              <p class="form-switch-copy">Already have an account? <button class="text-button" type="button" data-open-form="sign-in">Sign in</button></p>
+              <p class="form-switch-copy">Have an account? <button class="text-button" type="button" data-open-form="sign-in">Sign in</button></p>
             </form>
           </div>
-          <p class="auth-footnote">Your assignments stay organized in one simple place.</p>
         </section>
       </div>
     </div>

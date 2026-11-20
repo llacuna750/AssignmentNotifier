@@ -12,7 +12,6 @@ const skipLink = document.getElementById("skip-link");
 const signInForm = document.getElementById("sign-in-form");
 const signUpForm = document.getElementById("sign-up-form");
 const authHeading = document.getElementById("auth-heading");
-const authIntro = document.getElementById("auth-intro");
 const authFeedback = document.getElementById("auth-feedback");
 const showSignInButton = document.getElementById("show-sign-in");
 const showSignUpButton = document.getElementById("show-sign-up");
@@ -33,9 +32,6 @@ function openAuthForm(mode, { focus = false } = {}) {
   showSignInButton.setAttribute("aria-pressed", String(!isSignUp));
   showSignUpButton.setAttribute("aria-pressed", String(isSignUp));
   authHeading.textContent = isSignUp ? "Create your account" : "Welcome back";
-  authIntro.textContent = isSignUp
-    ? "One small step toward a more organized semester."
-    : "Sign in to pick up where you left off.";
   document.title = `${isSignUp ? "Create account" : "Sign in"} | Assignment Notifier`;
   setFeedback();
 
@@ -107,6 +103,7 @@ function resetAuthForms() {
       input.setAttribute("aria-invalid", "false");
       if (input.dataset.hint)
         input.setAttribute("aria-describedby", input.dataset.hint);
+      else input.removeAttribute("aria-describedby");
     });
     form.querySelectorAll(".password-toggle").forEach((button) => {
       const input = document.getElementById(
