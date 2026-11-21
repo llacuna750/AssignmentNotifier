@@ -18,12 +18,16 @@ const app = express();
 app.use(
   cors({
     origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
+    // Allow the browser to send and receive the auth cookie on API requests.
+    // Frontend fetch calls must also set credentials: "include".
+    credentials: true,
   }),
 );
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Parse the Cookie request header so auth middleware can read req.cookies.
 app.use(cookieParser());
 
 // Middleware to log incoming requests
@@ -46,7 +50,7 @@ app.use("/api/v1/subjects/", subjectRouter);
 
 app.get("/assignments", authorize, assignmentController.getAll);
 app.get("/", (req, res) => {
-  res.status(200).send("Root")
+  res.status(200).send("Welcome to Backend Dev")
 });
 
 // Keep the error handler after all routes so it can handle their errors.

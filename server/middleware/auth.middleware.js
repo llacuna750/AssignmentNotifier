@@ -5,13 +5,13 @@ import UserRepository from "../modules/users/user.repository.js";
 
 const authorize = async (req, res, next) => {
   try {
-    let token;
-    const isHeadersAuth = req.headers.authorization;
-    const isHeaderAuthStartWith = isHeadersAuth?.startsWith("Bearer ");
+    const authorization = req.headers.authorization;
+    const bearerToken = authorization?.startsWith("Bearer ")
+      ? authorization.slice("Bearer ".length)
+      : undefined;
 
-    if (isHeadersAuth && isHeaderAuthStartWith) {
-      token = req.headers.authorization.split(" ")[1];
-    }
+    // Prefer the existing Bearer header when supplied; otherwise use the login cookie.
+    const token = bearerToken || req.cookies?.accessToken;
 
     if (!token)
       return res.status(401).json({
@@ -33,6 +33,20 @@ const authorize = async (req, res, next) => {
 
     next();
   } catch (error) {
+    // Expired or malformed JWTs are authentication failures, not server errors.
+    const isInvalidToken = [
+      "TokenExpiredError",
+      "JsonWebTokenError",
+      "NotBeforeError",
+    ].includes(error.name);
+
+    if (isInvalidToken) {
+      return res.status(401).json({
+        success: false,
+        message: "Authentication token is invalid or expired.",
+      });
+    }
+
     next(error);
   }
 };

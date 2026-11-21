@@ -47,7 +47,8 @@ async function signUp(userData) {
   });
 
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+    // Give tokens a one-day expiry if JWT_EXPIRES_IN is not configured.
+    expiresIn: process.env.JWT_EXPIRES_IN || "1d",
   });
 
   return {
@@ -87,7 +88,8 @@ async function signIn(userData) {
   }
 
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+    // Keep sign-in tokens consistent with sign-up token expiry behavior.
+    expiresIn: process.env.JWT_EXPIRES_IN || "1d",
   });
 
   return {
