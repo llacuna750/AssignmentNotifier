@@ -1,3 +1,4 @@
+// Build the local API address from the host serving this page.
 const API_ORIGIN = (() => {
   const protocol =
     window.location.protocol === "file:" ? "http:" : window.location.protocol;
@@ -17,11 +18,13 @@ const showSignInButton = document.getElementById("show-sign-in");
 const showSignUpButton = document.getElementById("show-sign-up");
 const tokenKey = "assignmentNotifierToken";
 
+// Put API success or error messages in the accessible feedback area.
 function setFeedback(message = "", kind = "info") {
   authFeedback.textContent = message;
   authFeedback.dataset.kind = kind;
 }
 
+// Switch between sign-in and sign-up, update the heading, and optionally focus the first field.
 function openAuthForm(mode, { focus = false } = {}) {
   const isSignUp = mode === "sign-up";
 
@@ -31,7 +34,7 @@ function openAuthForm(mode, { focus = false } = {}) {
   showSignUpButton.classList.toggle("is-active", isSignUp);
   showSignInButton.setAttribute("aria-pressed", String(!isSignUp));
   showSignUpButton.setAttribute("aria-pressed", String(isSignUp));
-  authHeading.textContent = isSignUp ? "Create your account" : "Welcome back";
+  authHeading.textContent = isSignUp ? "Create account" : "Welcome back";
   document.title = `${isSignUp ? "Create account" : "Sign in"} | Assignment Notifier`;
   setFeedback();
 
@@ -46,12 +49,14 @@ function openAuthForm(mode, { focus = false } = {}) {
 showSignInButton.addEventListener("click", () => openAuthForm("sign-in"));
 showSignUpButton.addEventListener("click", () => openAuthForm("sign-up"));
 
+// Let the links below each form switch modes while moving focus to the new form.
 document.querySelectorAll("[data-open-form]").forEach((button) => {
   button.addEventListener("click", () => {
     openAuthForm(button.dataset.openForm, { focus: true });
   });
 });
 
+// Show or hide a password and keep the toggle button's accessible state in sync.
 document.querySelectorAll(".password-toggle").forEach((button) => {
   button.addEventListener("click", () => {
     const input = document.getElementById(button.getAttribute("aria-controls"));
@@ -66,6 +71,7 @@ document.querySelectorAll(".password-toggle").forEach((button) => {
   });
 });
 
+// Keep field error styling and screen-reader descriptions in sync after interaction.
 function syncFieldState(input) {
   if (!(input instanceof HTMLInputElement)) return;
 
@@ -85,6 +91,7 @@ function syncFieldState(input) {
   }
 }
 
+// Update validation state only as the user edits, leaves, or submits a field.
 document.querySelectorAll(".auth-form input").forEach((input) => {
   input.setAttribute("aria-invalid", "false");
   input.addEventListener("input", () => syncFieldState(input));
@@ -92,10 +99,12 @@ document.querySelectorAll(".auth-form input").forEach((input) => {
   input.addEventListener("invalid", () => syncFieldState(input));
 });
 
+// Remove the JWT saved for this browser tab.
 function clearSession() {
   sessionStorage.removeItem(tokenKey);
 }
 
+// Clear entered credentials and restore password fields to their hidden state.
 function resetAuthForms() {
   [signInForm, signUpForm].forEach((form) => {
     form.reset();
@@ -117,6 +126,7 @@ function resetAuthForms() {
   });
 }
 
+// Show the auth screen and its optional message.
 function showAuth({ message = "", kind = "info" } = {}) {
   dashboard.hidden = true;
   authScreen.hidden = false;
@@ -125,6 +135,7 @@ function showAuth({ message = "", kind = "info" } = {}) {
   document.title = "Sign in | Assignment Notifier";
 }
 
+// Personalize the dashboard, clear old account data, then load this user's assignments.
 function showDashboard(user, { focus = false } = {}) {
   const displayName = user?.name || user?.email || "Student";
   document.getElementById("welcome-user").textContent = displayName;
@@ -147,6 +158,7 @@ function showDashboard(user, { focus = false } = {}) {
   return loadAssignments();
 }
 
+// Fetch JSON from the API and turn non-success responses into readable errors.
 async function fetchJson(url, options = {}) {
   const response = await fetch(url, options);
   const payload = await response.json().catch(() => ({}));
@@ -162,6 +174,7 @@ async function fetchJson(url, options = {}) {
   return payload;
 }
 
+// Format an assignment due date for display, including invalid or missing dates.
 function formatDueDate(value) {
   if (!value) return "No due date";
 
@@ -179,6 +192,7 @@ function formatDueDate(value) {
   }).format(date);
 }
 
+// Build one assignment card using text nodes for all data received from the API.
 function makeAssignmentCard(assignment) {
   const card = document.createElement("article");
   card.className = "assignment-card";
@@ -223,6 +237,7 @@ function makeAssignmentCard(assignment) {
   return card;
 }
 
+// Update the dashboard totals and replace the assignment list with the API results.
 function renderAssignments(assignments) {
   const list = document.getElementById("assignment-list");
   const countLabel = document.getElementById("assignment-count");
@@ -260,6 +275,7 @@ function renderAssignments(assignments) {
   );
 }
 
+// Request assignments with the current JWT and show a useful message if loading fails.
 async function loadAssignments() {
   const list = document.getElementById("assignment-list");
   const token = sessionStorage.getItem(tokenKey);
@@ -291,6 +307,7 @@ async function loadAssignments() {
   }
 }
 
+// On page load, ask the API whether the saved JWT still belongs to a valid session.
 async function validateSavedSession() {
   const token = sessionStorage.getItem(tokenKey);
   if (!token) return;
@@ -318,6 +335,7 @@ async function validateSavedSession() {
   }
 }
 
+// Validate the form, send credentials to sign-in/sign-up, save the JWT, and open the dashboard.
 async function handleAuthSubmit(event) {
   event.preventDefault();
   const form = event.currentTarget;
@@ -375,6 +393,7 @@ async function handleAuthSubmit(event) {
 signInForm.addEventListener("submit", handleAuthSubmit);
 signUpForm.addEventListener("submit", handleAuthSubmit);
 
+// Sign out locally by clearing the JWT and returning to the sign-in form.
 document.getElementById("logout-button").addEventListener("click", () => {
   clearSession();
   resetAuthForms();
