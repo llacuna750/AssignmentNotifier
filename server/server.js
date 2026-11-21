@@ -10,9 +10,9 @@ import { userRouter } from "./modules/users/user.routes.js";
 import arcjetMiddleware from "./middleware/arcjet.middleware.js";
 import authorize from "./middleware/auth.middleware.js";
 import subjectRouter from "./modules/subjects/subject.routes.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
-const port = 3000;
 
 // Enable CORS for specific origins
 app.use(
@@ -24,6 +24,7 @@ app.use(
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Middleware to log incoming requests
 app.use(logRequest);
@@ -43,13 +44,16 @@ app.use("/api/v1/users/", userRouter);
 
 app.use("/api/v1/subjects/", subjectRouter);
 
-app.get("/", authorize, assignmentController.getAll);
+app.get("/assignments", authorize, assignmentController.getAll);
+app.get("/", (req, res) => {
+  res.status(200).send("Root")
+});
 
 // Keep the error handler after all routes so it can handle their errors.
 app.use(errorMiddleware);
 
-app.listen(port, function () {
-  console.log(`Server is running on http://localhost:${port} 🚀`);
+app.listen(process.env.PORT, function () {
+  console.log(`Server is running on http://localhost:${process.env.PORT} 🚀`);
 });
 
 /*
