@@ -1,0 +1,147 @@
+:root {
+  /* Automatically adapts to system light/dark preference */
+  color-scheme: light dark;
+  --bg-page: light-dark(#f4f6f9, #0f172a);
+  --bg-surface: light-dark(#ffffff, #1e293b);
+  --bg-input: light-dark(#f8fafc, #0f172a);
+  --text-main: light-dark(#0f172a, #f8fafc);
+  --text-muted: light-dark(#475569, #94a3b8);
+  --border: light-dark(#cbd5e1, #334155);
+  --accent: light-dark(#2563eb, #3b82f6);
+  --error: light-dark(#dc2626, #f87171);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.75rem;
+  box-shadow: 0 10px 25px rgb(0 0 0 / 0.12);
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--bg-input);
+  padding: 0.25rem;
+  border-radius: 10px;
+}
+
+.tabs button {
+  padding: 0.6rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tabs button[aria-selected="true"] {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+}
+
+form[hidden] {
+  display: none;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  width: 100%;
+  min-height: 44px; /* Touch-friendly target size */
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-size: 1rem;
+}
+
+.password-wrap input {
+  padding-right: 4.2rem;
+}
+
+/* Highlight invalid fields only AFTER the user interacts with them */
+input:user-invalid {
+  border-color: var(--error);
+}
+
+.toggle-pw {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.35rem 0.55rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.error-msg {
+  min-height: 1.1em;
+  font-size: 0.82rem;
+  color: var(--error);
+}
+
+.submit-btn {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 0.25rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.status {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}

@@ -56,8 +56,8 @@ app.get("/", (req, res) => {
 // Keep the error handler after all routes so it can handle their errors.
 app.use(errorMiddleware);
 
-app.listen(process.env.PORT, function () {
-  console.log(`Server is running on http://localhost:${process.env.PORT} 🚀`);
+app.listen(process.env.PORT || 3000, function () {
+  console.log(`Server is running on http://localhost:${process.env.PORT || 3000} 🚀`);
 });
 
 /*

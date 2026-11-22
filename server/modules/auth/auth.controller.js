@@ -60,7 +60,7 @@ const signIn = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+};0
 
 const signOut = async (req, res, next) => {
   try {
