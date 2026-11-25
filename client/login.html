@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In</title>
+    <link rel="stylesheet" href="./css/authen.css" />
+    <title>Assignment Notifier</title>
+</head>
+
+<body>
+    <main class="card">
+        <h1>Welcome back</h1>
+        <p class="subtitle">Sign in to your account to continue.</p>
+
+        <form data-auth-form="login" novalidate>
+            <div class="field">
+                <label for="login-email">Email</label>
+                <input id="login-email" name="email" type="email" autocomplete="username" spellcheck="false"
+                    enterkeyhint="next" required />
+                <span class="error-text" aria-live="polite"></span>
+            </div>
+
+            <div class="field">
+                <label for="login-password">Password</label>
+                <div class="password-box">
+                    <input id="login-password" name="password" type="password" autocomplete="current-password"
+                        enterkeyhint="done" required />
+                    <button type="button" class="toggle-password" aria-pressed="false" aria-label="Show password">
+                        Show
+                    </button>
+                </div>
+                <span class="error-text" aria-live="polite"></span>
+            </div>
+
+            <button type="submit" class="btn-primary">Sign In</button>
+        </form>
+
+        <p class="status-banner" role="status"></p>
+
+        <p class="switch-page">
+            Don't have an account? <a href="signup.html">Create account</a>
+        </p>
+    </main>
+
+    <script src="./js/authen.js" defer></script>
+</body>
+
+</html>
