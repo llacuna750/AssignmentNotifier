@@ -50,7 +50,7 @@ app.use("/api/v1/subjects/", subjectRouter);
 
 app.get("/assignments", authorize, assignmentController.getAll);
 app.get("/", (req, res) => {
-  res.status(200).send("Welcome to Backend Dev")
+  res.status(200).send("Welcome to Backend Dev").json({data: 'Welcome Page!'})
 });
 
 // Keep the error handler after all routes so it can handle their errors.

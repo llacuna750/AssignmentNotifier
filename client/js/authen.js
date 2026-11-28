@@ -34,7 +34,6 @@ function checkField(input) {
   setTimeout(() => {
     errorBox.textContent = "";
   }, 2000);
-
   return false;
 }
 
@@ -52,11 +51,10 @@ document.querySelectorAll("input").forEach((input) => {
 
 // 3. Handle form submission (practice demo using localStorage)
 const form = document.querySelector("[data-auth-form]");
-console.log(form);
 const statusBanner = document.querySelector(".status-banner");
 
 if (form) {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const inputs = [...form.querySelectorAll("input")];
@@ -69,24 +67,88 @@ if (form) {
 
     const data = Object.fromEntries(new FormData(form));
     const mode = form.dataset.authForm;
+    console.log(mode); // *---------------------------------------------------console.log()
 
     if (mode === "signup") {
-      // Save demo user in localStorage so you can test logging in right after!
-      localStorage.setItem("demoUser", JSON.stringify(data));
-      statusBanner.textContent = `Account created for ${data.name}! You can now sign in.`;
+      await signUp(data);
       form.reset();
     } else {
-      const savedUser = JSON.parse(localStorage.getItem("demoUser") || "null");
-
-      if (
-        savedUser &&
-        savedUser.email === data.email &&
-        savedUser.password === data.password
-      ) {
-        statusBanner.textContent = `Welcome back, ${savedUser.name}! Login successful.`;
-      } else {
-        statusBanner.textContent = `Signed in as ${data.email} (create an account first to test matching credentials).`;
-      }
+      await signIn(data);
     }
   });
+}
+const baseUrl = "http://localhost:3000";
+
+async function signUp(data) {
+  const submitBtn = form.querySelector('[type="submit"]');
+  submitBtn.disabled = true;
+
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/auth/sign-up`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(`${result.message}` || "Could not create account.");
+    }
+
+    console.log("API response:", result);
+
+    statusBanner.style.color = "var(--success)";
+    statusBanner.textContent =
+      result.message || "Account created! Redirecting...";
+
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1000);
+  } catch (error) {
+    statusBanner.style.color = "var(--error)";
+    statusBanner.textContent =
+      error.message || "Network error. Please try again.";
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
+
+async function signIn(data) {
+  const submitBtn = form.querySelector('[type="submit"]');
+  if (submitBtn) submitBtn.disabled = true;
+
+  try {
+    const response = await fetch(`${baseUrl}/api/v1/auth/sign-in`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // Ensures browser stores/sends HttpOnly cookies
+      body: JSON.stringify(data),
+    });
+
+    result = await response.json();
+    console.log("API response:", result);
+
+    if (!response.ok) {
+      throw new Error(`${result.message}` || "Invalid email or password.");
+    }
+
+    statusBanner.style.color = "var(--success)";
+    statusBanner.textContent = result.message || "Signed in! Redirecting...";
+
+    // Redirect to your app's home/dashboard page after sign-in
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 800);
+  } catch (error) {
+    console.log(error.message);
+    statusBanner.style.color = "var(--error)";
+    statusBanner.textContent = error.message;
+  } finally {
+    if (submitBtn) submitBtn.disabled = false;
+  }
 }
