@@ -10,39 +10,50 @@
 </head>
 
 <body>
-    <!-- <div class="container container-toggle-hide" id="sidebar"> -->
-    <div id="sidebar">
+    <div id="sidebar" class="container">
         <div class="collapsible-bar">
             <div class="title-app-hac">
                 <div class="hamburger" id="burger">
-                    <img class="hvr-bounce-in" src="./images/hamburger.svg" alt="harburger.svg" id="hamburger" />
+                    <button class="sidebar-toggle" id="hamburger" type="button" aria-label="Toggle navigation"
+                        aria-controls="home-assTask-calender" aria-expanded="true">
+                        <img class="hvr-bounce-in" src="./images/hamburger.svg" alt="" />
+                    </button>
                     <div class="hide-hamburger-menu">
                         <img src="./images/logo-titleApp.svg" alt="logoTitleApp">
                         <h2>Assignment <br> Notifier</h2>
                     </div>
                 </div>
 
-                <div class="home-assTask-calender" id="home-assTask-calender">
-                    <div class="dashboardIcon hvr-bounce-in">
-                        <img src="./images/dashboard.svg" alt="dashboard.svg" />
-                        <p class="hide-hamburger-menu">Dashboard</p>
-                    </div>
-                    <div class="AssignmentTask hvr-bounce-in">
-                        <img src="./images/AssignmentTask.svg" alt="AssignmentTask.svg" />
-                        <p class="hide-hamburger-menu">All Assignments</p>
-                    </div>
-                    <div class="calendarSvg hvr-bounce-in">
-                        <img src="./images/calendar.svg" alt="calendarSvg" />
-                        <p class="hide-hamburger-menu">Calendar</p>
-                    </div>
-                </div>
+                <nav class="home-assTask-calender" id="home-assTask-calender" aria-label="Main navigation">
+                    <a class="sidebar-link" href="#dashboard" data-view-link="dashboard" aria-label="Dashboard"
+                        aria-current="page">
+                        <div class="dashboardIcon hvr-bounce-in">
+                            <img src="./images/dashboard.svg" alt="" />
+                            <p class="hide-hamburger-menu">Dashboard</p>
+                        </div>
+                    </a>
+                    <a class="sidebar-link" href="#all-assignments" data-view-link="all-assignments"
+                        aria-label="All Assignments">
+                        <div class="AssignmentTask hvr-bounce-in">
+                            <img src="./images/AssignmentTask.svg" alt="" />
+                            <p class="hide-hamburger-menu">All Assignments</p>
+                        </div>
+                    </a>
+                    <a class="sidebar-link" href="#calendar" data-view-link="calendar" aria-label="Calendar">
+                        <div class="calendarSvg hvr-bounce-in">
+                            <img src="./images/calendar.svg" alt="" />
+                            <p class="hide-hamburger-menu">Calendar</p>
+                        </div>
+                    </a>
+                </nav>
             </div>
         </div>
 
-        <div class="dashboard-container">
+        <main class="dashboard-container" id="main-content">
+            <section class="dashboard-view" data-view="dashboard" aria-label="Dashboard" tabindex="-1">
             <div class="dashboard-header">
                 <div class="dashboard-text hvr-wobble-top">
-                    <p>Dashboard</p>
+                    <h1>Dashboard</h1>
                 </div>
                 <div class="add-buttons">
                     <div class="add-subject hvr-wobble-top">
@@ -69,7 +80,7 @@
                 <div>
                     <p>In Progress</p>
                     <p>0</p>
-                </div id="in-progress-task">
+                </div>
                 <div>
                     <p>Completed</p>
                     <p>0</p>
@@ -88,7 +99,7 @@
                             <img src="./images/drVegapunk.jpeg" alt="drVegapunk">
                             <div>
                                 <h5 class="subject-title-assignment" id="s-ta">Physics & Theoretical Science -
-                                    Mass-energy equivalence (E = mc²)</h5>
+                                    Mass-energy equivalence (E = mc&#178;)</h5>
                                 <p class="instructor" id="instructor">Albert Einstein</p>
                                 <p class="due-date" id="d-date"><span>Due date: </span>Nov 3, 2026</p>
                             </div>
@@ -128,9 +139,51 @@
                     </div>
                 </div>
             </div>
-        </div>
+            </section>
 
-        <div class="allTask" hidden></div>
+            <section class="dashboard-view" data-view="all-assignments" aria-label="All Assignments" tabindex="-1"
+                hidden>
+                <div class="dashboard-header">
+                    <div class="dashboard-text hvr-wobble-top">
+                        <h1>All Assignments</h1>
+                    </div>
+                </div>
+
+                <div class="status-assignment-container">
+                    <div class="sample-data">
+                        <div class="info-status">
+                            <div class="sub-img-tAss-ins-due">
+                                <img src="./images/drVegapunk.jpeg" alt="">
+                                <div>
+                                    <h2 class="subject-title-assignment">Physics & Theoretical Science - Mass-energy equivalence (E = mc&#178;)</h2>
+                                    <p class="instructor">Albert Einstein</p>
+                                    <p class="due-date"><span>Due date: </span>Nov 3, 2026</p>
+                                </div>
+                            </div>
+                            <div class="logo-status">
+                                <div class="clock-icon-pending">
+                                    <img src="./images/pending-icon.svg" alt="">
+                                    <p><b>Pending</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-view" data-view="calendar" aria-label="Calendar" tabindex="-1" hidden>
+                <div class="dashboard-header">
+                    <div class="dashboard-text hvr-wobble-top">
+                        <h1>Calendar</h1>
+                    </div>
+                </div>
+
+                <div class="sample-data">
+                    <h2>Assignment calendar</h2>
+                    <p>Your assignment due dates will appear here.</p>
+                </div>
+            </section>
+        </main>
     </div>
 
 
