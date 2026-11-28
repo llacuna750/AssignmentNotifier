@@ -75,6 +75,9 @@ if (form) {
     } else {
       await signIn(data);
     }
+    setTimeout(() => {
+      statusBanner.textContent = "";
+    }, 3000);
   });
 }
 const baseUrl = "http://localhost:3000";
@@ -111,6 +114,7 @@ async function signUp(data) {
     statusBanner.style.color = "var(--error)";
     statusBanner.textContent =
       error.message || "Network error. Please try again.";
+    form.reset();
   } finally {
     submitBtn.disabled = false;
   }
@@ -148,6 +152,7 @@ async function signIn(data) {
     console.log(error.message);
     statusBanner.style.color = "var(--error)";
     statusBanner.textContent = error.message;
+    form.reset();
   } finally {
     if (submitBtn) submitBtn.disabled = false;
   }
